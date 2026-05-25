@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Diego Pérez Muñoz — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel">
+/* ── DATA ────────────────────────────────────────────────────────────── */
+const PROJECTS = [
+  {
+    id: "mi-pueblo-es",
+    n: "01",
+    title: "MI PUEBLO ES",
+    titleEn: "MY TOWN IS",
+    kind: { es: "Proyecto audiovisual", en: "Audiovisual project" },
+    year: "2025",
+    cover: "assets/mi-pueblo/08.jpg",
+    featured: true,
+    about: {
+      es: "Un retrato audiovisual de Trillo, el pueblo donde crecí. Una pieza íntima que reúne los gestos, los rostros y los ritmos de un sitio pequeño, montada a partir de material grabado en cámara y recuerdos sonoros.",
+      en: "An audiovisual portrait of Trillo, the village where I grew up. An intimate piece that gathers the gestures, faces and rhythms of a small place, edited from camera footage and sonic memories."
+    },
+    meta: [
+      { k: { es: "Rol", en: "Role" }, v: { es: "Dirección · Cámara · Edición · Sonido", en: "Direction · Camera · Editing · Sound" } },
+      { k: { es: "Duración", en: "Duration" }, v: "03:42" },
+      { k: { es: "Formato", en: "Format" }, v: { es: "Vídeo HD · 16:9 · Color", en: "HD Video · 16:9 · Color" } },
+      { k: { es: "Software", en: "Software" }, v: "Premiere Pro · DaVinci Resolve" },
+      { k: { es: "Lugar", en: "Location" }, v: "Trillo, Guadalajara" }
+    ],
+    process: {
+      es: "El proceso empezó con varias visitas a Trillo con la cámara encendida. Sin guion cerrado: anotar lo que aparecía — las eras, las paredes de piedra, los vecinos, el río. Después vino el montaje: elegir una secuencia que no contara la historia del pueblo, sino el vínculo con él.",
+      en: "The process started with several visits to Trillo with the camera on. Without a fixed script: note what came up — the fields, the stone walls, the neighbours, the river. Then came editing: choosing a sequence that wouldn't tell the town's story but my bond with it."
+    },
+    result: {
+      es: "Una pieza corta, pensada para proyectarse en sala o verse en pantalla íntima. La foto fija que aquí se muestra corresponde a los frames seleccionados y al making-of.",
+      en: "A short piece, meant to be projected in a room or watched on an intimate screen. Still frames here correspond to selected shots and making-of."
+    },
+    images: [
+      { src: "assets/mi-pueblo/08.jpg", size: "wide", cap: "FRAME · 07:32" },
+      { src: "assets/mi-pueblo/02.jpg", size: "span-6", cap: "FRAME · 01:43" },
+      { src: "assets/mi-pueblo/05.jpg", size: "span-6", cap: "FRAME · 03:46" },
+      { src: "assets/mi-pueblo/11.jpg", size: "sq",    cap: "FRAME · 09:02" },
+      { src: "assets/mi-pueblo/12.jpg", size: "sq",    cap: "FRAME · 10:08" },
+      { src: "assets/mi-pueblo/13.jpg", size: "sq",    cap: "FRAME · 10:58" },
+      { src: "assets/mi-pueblo/14.jpg", size: "span-6", cap: "MAKING OF · 01" },
+      { src: "assets/mi-pueblo/15.jpg", size: "span-6", cap: "MAKING OF · 02" },
+      { src: "assets/mi-pueblo/16.jpg", size: "wide",  cap: "MAKING OF · 03" },
+      { src: "assets/mi-pueblo/01.jpg", size: "span-6", cap: "FRAME · 00:07" },
+      { src: "assets/mi-pueblo/03.jpg", size: "span-6", cap: "FRAME · 01:48" },
+      { src: "assets/mi-pueblo/04.jpg", size: "third",  cap: "FRAME · 03:10" },
+      { src: "assets/mi-pueblo/06.jpg", size: "third",  cap: "FRAME · 06:12" },
+      { src: "assets/mi-pueblo/07.jpg", size: "third",  cap: "FRAME · 06:33" },
+      { src: "assets/mi-pueblo/09.jpg", size: "span-6", cap: "FRAME · 07:40" },
+      { src: "assets/mi-pueblo/10.jpg", size: "span-6", cap: "FRAME · 07:47" },
+      { src: "assets/mi-pueblo/17.jpg", size: "wide",  cap: "MAKING OF · 04" }
+    ]
+  },
+  {
+    id: "oviu",
+    n: "02",
+    title: "R3UP",
+    titleEn: "R3UP",
+    kind: { es: "Identidad · Moda", en: "Branding · Fashion" },
+    year: "2025",
+    imageLabel: { es: "Identidad · Packaging", en: "Identity · Packaging" },
+    about: {
+      es: "Proyecto integral de creación de marca de ropa: desde la identidad visual hasta la producción de conjuntos, packaging y shooting final. R3UP nace como ejercicio de construir una marca desde cero — naming, logotipo, etiquetas, lookbook y dirección de arte de la sesión fotográfica.",
+      en: "End-to-end fashion brand project: from visual identity to garment production, packaging and final shooting. R3UP was built from scratch — naming, logo, labels, lookbook and art direction of the photo session."
+    },
+    meta: [
+      { k: { es: "Rol", en: "Role" }, v: { es: "Identidad · Dirección de arte · Producción", en: "Branding · Art direction · Production" } },
+      { k: { es: "Formato", en: "Format" }, v: { es: "Marca · Packaging · Shooting", en: "Brand · Packaging · Shooting" } },
+      { k: { es: "Cámara", en: "Camera" }, v: "Canon EOS 90D · 50mm" },
+      { k: { es: "Software", en: "Software" }, v: "Photoshop · Illustrator · InDesign · Lightroom" },
+      { k: { es: "Técnicas", en: "Techniques" }, v: "DTF · Serigrafía · Corte y grabado láser · Máquina de coser · Remalladora" }
+    ],
+    process: {
+      es: "El proceso arrancó con la conceptualización de la marca: naming, valores, universo visual. Después vino el diseño de identidad — logotipo, etiquetas, packaging — y la producción de los conjuntos. La última fase fue el shooting de lookbook, con dirección de arte propia.",
+      en: "The process started with brand concept: naming, values, visual universe. Then came identity design — logo, labels, packaging — and garment production. The final phase was the lookbook shooting, with in-house art direction."
+    },
+    result: {
+      es: "Una marca completa con identidad, producto y comunicación visual coherente. El shooting cierra el proyecto mostrando las piezas en contexto.",
+      en: "A complete brand with identity, product and coherent visual communication. The shooting closes the project by showing the pieces in context."
+    },
+    looks: [
+      {
+        id: 1,
+        name: { es: "Look 1 — Oficinista", en: "Look 1 — Office" },
+        desc: {
+          es: "Camisa blanca de corte oversize, pantalón de pinzas gris, gafas de pasta, reloj y iPod. El conjunto reconstruye al oficinista clásico con un giro contemporáneo.",
+          en: "Oversized white shirt, grey pleated trousers, thick-frame glasses, watch and iPod. The outfit reconstructs the classic office worker with a contemporary twist."
+        },
+        cover: "assets/oviu/look1/01.jpg",
+        coverScale: 1.08,
+        images: [
+          { src: "assets/oviu/look1/02.jpg", size: "span-6" }, { src: "assets/oviu/look1/03.jpg", size: "span-6" },
+          { src: "assets/oviu/look1/04.jpg", size: "span-6" }, { src: "assets/oviu/look1/05.jpg", size: "span-6" }
+        ]
+      },
+      {
+        id: 2,
+        name: { es: "Look 2 — Motero", en: "Look 2 — Biker" },
+        desc: {
+          es: "Total look negro: abrigo de lana, camisa con estampado del monograma R3UP en rojo, pantalón satinado, guantes de piel y botas. Silueta oscura y compacta.",
+          en: "Total black look: wool coat, shirt with R3UP monogram print in red, satin trousers, leather gloves and boots. Dark, compact silhouette."
+        },
+        cover: "assets/oviu/look2/01.jpg",
+        coverScale: 1.08,
+        coverPos: "60% center",
+        images: [
+          { src: "assets/oviu/look2/02.jpg", size: "span-6" }, { src: "assets/oviu/look2/03.jpg", size: "span-6" },
+          { src: "assets/oviu/look2/04.jpg", size: "span-6" }, { src: "assets/oviu/look2/05.jpg", size: "span-6" }
+        ]
+      },
+      {
+        id: 3,
+        name: { es: "Look 3 — Fiesta", en: "Look 3 — Party" },
+        desc: {
+          es: "Blazer negro con forro estampado del monograma, camisa oscura, pantalón de vestir, gafas de sol envolventes y botas chunky. La versión nocturna y desenfadada de la misma persona.",
+          en: "Black blazer with monogram-printed lining, dark shirt, dress trousers, wraparound sunglasses and chunky boots. The nighttime, laid-back version of the same person."
+        },
+        cover: "assets/oviu/look3/01.jpg",
+        images: [
+          { src: "assets/oviu/look3/02.jpg", size: "span-6" }, { src: "assets/oviu/look3/03.jpg", size: "span-6" },
+          { src: "assets/oviu/look3/04.jpg", size: "span-6" }, { src: "assets/oviu/look3/05.jpg", size: "span-6" }
+        ]
+      }
+    ],
+    images: [
+      { src: "assets/oviu/identidad/cover.jpg", size: "wide", fit: true },
+      { src: "assets/oviu/identidad/01.jpg", size: "span-6", fit: true }, { src: "assets/oviu/identidad/02.jpg", size: "span-6", fit: true },
+      { src: "assets/oviu/identidad/03.jpg", size: "span-6", fit: true }, { src: "assets/oviu/identidad/04.jpg", size: "span-6", fit: true },
+      { src: "assets/oviu/identidad/06.jpg", size: "third" },
+      { src: "assets/oviu/identidad/08.jpg", size: "third" }, { src: "assets/oviu/identidad/07.jpg", size: "third" }
+    ]
+  },
+  {
+    id: "punketa",
+    n: "03",
+    title: "PUNKETA",
+    titleEn: "PUNKETA",
+    kind: { es: "Proyecto editorial", en: "Editorial project" },
+    year: "2024",
+    about: {
+      es: "Revista encuadernada y diseñada íntegramente desde InDesign e Illustrator. El sistema tipográfico es la espina del proyecto: una rejilla densa, títulos grandes y cubiertas impresas en pliego.",
+      en: "Magazine fully designed and bound in InDesign and Illustrator. The typographic system is the spine of the project: dense grid, big titles and covers printed on sheet."
+    },
+    meta: [
+      { k: { es: "Rol", en: "Role" }, v: { es: "Dirección de arte · Diagramación", en: "Art direction · Layout" } },
+      { k: { es: "Formato", en: "Format" }, v: { es: "Revista · 48 pp.", en: "Magazine · 48 pp." } },
+      { k: { es: "Tirada", en: "Print run" }, v: { es: "Maqueta única", en: "One-off dummy" } },
+      { k: { es: "Software", en: "Software" }, v: "InDesign · Illustrator" }
+    ],
+    process: {
+      es: "La rejilla se diseñó primero, sin contenido: 6 columnas, medianil estrecho, líneas hair. Después se volcó el texto y las imágenes.",
+      en: "The grid was designed first, without content: 6 columns, narrow gutter, hair rules. Then text and images were poured in."
+    },
+    result: {
+      es: "Archivos listos para imprimir (PDFs adjuntos en la fuente) y cubierta impresa en pliego a dos tintas.",
+      en: "Print-ready files (source PDFs attached) and a cover printed on sheet in two inks."
+    },
+    images: [
+      { src: "assets/punketa/03.jpg", size: "span-6", fit: true }, { src: "assets/punketa/02.jpg", size: "span-6", fit: true },
+      { src: "assets/punketa/01.jpg", size: "span-6", fit: true }, { src: "assets/punketa/04.jpg", size: "span-6", fit: true },
+      { src: "assets/punketa/06.jpg", size: "wide", fit: true },
+      { src: "assets/punketa/08.jpg", size: "span-6", fit: true }, { src: "assets/punketa/09.jpg", size: "span-6", fit: true },
+      { src: "assets/punketa/10.jpg", size: "span-6", fit: true }, { src: "assets/punketa/07.jpg", size: "span-6", fit: true }
+    ]
+  },
+  {
+    id: "latrakablock",
+    n: "04",
+    title: "LATRAKABLOCK",
+    titleEn: "LATRAKABLOCK",
+    kind: { es: "Proyecto tipográfico", en: "Type project" },
+    year: "2024",
+    cover: "assets/latrakablock/02.jpg",
+    about: {
+      es: "Una tipografía display dibujada a partir de muestrarios analógicos y fotografía de letterpress. La familia vive como Regular OpenType y como sistema fotográfico propio.",
+      en: "A display typeface drawn from analog samples and letterpress photography. The family lives both as a Regular OpenType and as its own photographic system."
+    },
+    meta: [
+      { k: { es: "Rol", en: "Role" }, v: { es: "Diseño tipográfico · Fotografía", en: "Type design · Photography" } },
+      { k: { es: "Formato", en: "Format" }, v: "OpenType · TT / VFC" },
+      { k: { es: "Proceso", en: "Process" }, v: { es: "Letterpress + dibujo + Glyphs", en: "Letterpress + drawing + Glyphs" } },
+      { k: { es: "Archivos", en: "Files" }, v: "TIPO BLOCK.ai · LATRAKABLOCK.vfc" }
+    ],
+    process: {
+      es: "El punto de partida fue una sesión de fotografía con letterpress: más de 180 disparos catalogados por letra y por peso. De ahí salieron los dibujos, primero a mano y luego digitalizados en Glyphs.",
+      en: "Starting point: a letterpress photo session — 180+ shots catalogued by letter and weight. From there came the drawings, first by hand then digitized in Glyphs."
+    },
+    result: {
+      es: "Familia tipográfica funcional en Regular y especímen fotográfico que acompaña al archivo de fuente.",
+      en: "Functional type family in Regular plus a photographic specimen that accompanies the font file."
+    },
+    images: [
+      { src: "assets/latrakablock/01.jpg", size: "third" },
+      { src: "assets/latrakablock/02.jpg", size: "third" },
+      { src: "assets/latrakablock/03.jpg", size: "third" },
+      { src: "assets/latrakablock/04.jpg", size: "span-6" },
+      { src: "assets/latrakablock/05.jpg", size: "span-6" },
+      { src: "assets/latrakablock/06.jpg", size: "wide", cap: "ESPECÍMEN" },
+      { src: "assets/latrakablock/07.jpg", size: "third" },
+      { src: "assets/latrakablock/08.jpg", size: "third" },
+      { src: "assets/latrakablock/09.jpg", size: "third" }
+    ]
+  },
+  {
+    id: "spify-af",
+    coverRotate: true,
+    n: "05",
+    title: "SPIFY AF",
+    titleEn: "SPIFY AF",
+    kind: { es: "Proyecto de moda", en: "Fashion project" },
+    year: "2025",
+    cover: "assets/spify/04.png",
+    about: {
+      es: "Colección cápsula de camisetas serigrafiadas. El proyecto mezcla técnicas de producción gráfica (serigrafía, DTF, transfer) con una dirección de arte científica: escalas, acetatos y referencias a Chillida.",
+      en: "Capsule t-shirt collection, screen printed. The project mixes graphic production techniques (screenprint, DTF, transfer) with a scientific art direction: scales, acetates and references to Chillida."
+    },
+    meta: [
+      { k: { es: "Rol", en: "Role" }, v: { es: "Dirección · Producción gráfica", en: "Direction · Graphic production" } },
+      { k: { es: "Técnicas", en: "Techniques" }, v: { es: "Serigrafía · Transfer · DTF", en: "Screenprint · Transfer · DTF" } },
+      { k: { es: "Piezas", en: "Pieces" }, v: { es: "Cápsula · camisetas", en: "Capsule · tees" } },
+      { k: { es: "Software", en: "Software" }, v: "Illustrator · Photoshop · InDesign" }
+    ],
+    process: {
+      es: "Desarrollo gráfico en Illustrator, fotoescala y acetatos impresos para pantalla. Las pruebas de tirada se hicieron antes de pasar a producto final.",
+      en: "Graphic development in Illustrator, photo-scale and acetates printed for screens. Proofs were done before final production."
+    },
+    result: {
+      es: "Camisetas serigrafiadas y fotografía de producto que cierra el relato. Las fotos aquí son selección editada del shooting.",
+      en: "Screen-printed t-shirts and product photography to close the piece. These photos are an edited selection of the shoot."
+    },
+    images: [
+      { src: "assets/spify/04.png", size: "tall", rotate: true, cap: "LOOK · 04" },
+      { src: "assets/spify/01.png", size: "tall", rotate: true },
+      { src: "assets/spify/02.png", size: "tall", rotate: true },
+      { src: "assets/spify/03.png", size: "tall", rotate: true },
+      { src: "assets/spify/05.png", size: "third", rotate: true }, { src: "assets/spify/06.png", size: "third", rotate: true }, { src: "assets/spify/07.png", size: "third", rotate: true },
+      { src: "assets/spify/08.png", size: "tall", rotate: true },
+      { src: "assets/spify/09.png", size: "tall", rotate: true }
+    ]
+  },
+  {
+    id: "latam-creative-talents",
+    n: "06",
+    title: "LATAM CREATIVE TALENTS",
+    titleEn: "LATAM CREATIVE TALENTS",
+    kind: { es: "Proyecto expositivo", en: "Exhibition project" },
+    year: "2025",
+    cover: "",
+    about: {
+      es: "Proyecto expositivo para visibilizar talento creativo latinoamericano. Pieza colaborativa, pendiente de montaje y documentación fotográfica.",
+      en: "Exhibition project to showcase Latin American creative talent. Collaborative piece, pending setup and photographic documentation."
+    },
+    meta: [
+      { k: { es: "Rol", en: "Role" }, v: { es: "Diseño · Curaduría", en: "Design · Curation" } },
+      { k: { es: "Formato", en: "Format" }, v: { es: "Instalación / expositivo", en: "Installation / exhibition" } },
+      { k: { es: "Estado", en: "Status" }, v: { es: "En producción", en: "In production" } }
+    ],
+    process: {
+      es: "En producción. Esta ficha queda reservada hasta contar con documentación fotográfica del montaje.",
+      en: "In production. This card is held until we have photographic documentation of the setup."
+    },
+    result: { es: "Pendiente.", en: "Pending." },
+    images: [
+      { src: "", size: "wide",   placeholder: { es: "Render/maqueta del expositor — foto pendiente", en: "Render/mockup of display — photo pending" }, cap: "EXPOSITOR" },
+      { src: "", size: "span-6", placeholder: { es: "Montaje · vista general", en: "Setup · overall view" } },
+      { src: "", size: "span-6", placeholder: { es: "Detalle de gráfica", en: "Graphic detail" } },
+      { src: "", size: "third",  placeholder: { es: "Pieza gráfica 01", en: "Graphic piece 01" } },
+      { src: "", size: "third",  placeholder: { es: "Pieza gráfica 02", en: "Graphic piece 02" } },
+      { src: "", size: "third",  placeholder: { es: "Pieza gráfica 03", en: "Graphic piece 03" } }
+    ]
+  }
+];
+
+const CV_DATA = {
+  intro: {
+    es: "Creativo en constante formación y apasionado por el descubrimiento de nuevas disciplinas. Mi proceso de diseño se nutre de la observación del entorno y de intereses transversales. Busco aplicar esta curiosidad y capacidad de aprendizaje en proyectos visuales que requieran una mirada fresca y polivalente.",
+    en: "A creative in constant training, passionate about discovering new disciplines. My design process feeds on observation of the surroundings and transversal interests. I seek to apply this curiosity and ability to learn in visual projects that require a fresh and versatile eye."
+  },
+  experience: [
+    { when: "2026", what: { es: "Auxiliar — Fórmula E Madrid", en: "Assistant — Formula E Madrid" }, body: { es: "Gestión logística y operativa en un entorno de alta presión. Control de accesos y flujos de público, demostrando capacidad de reacción y trabajo en equipo en eventos internacionales de gran escala.", en: "Logistical and operational management in a high-pressure setting. Access control and audience flow, showing reaction capacity and teamwork in large-scale international events." } },
+    { when: "2026", what: { es: "Camarero — Punto de Or'", en: "Waiter — Punto de Or'" }, body: { es: "Atención al cliente directa y gestión ágil de comandas. Desarrollo de habilidades de comunicación interpersonal, resolución de conflictos y eficiencia en picos de alta carga de trabajo.", en: "Direct customer service and quick order management. Developed interpersonal communication, conflict resolution and efficiency during peak shifts." } },
+    { when: "2025 – 2026", what: { es: "Auxiliar — Mutua Madrid Open (Adecco)", en: "Assistant — Mutua Madrid Open (Adecco)" }, body: { es: "Apoyo en la organización y protocolo de un evento deportivo de élite. Enfoque en la excelencia del servicio, puntualidad y coordinación con distintos departamentos para asegurar el éxito del torneo.", en: "Support in the organization and protocol of a top-level sports event. Focus on service excellence, punctuality and cross-department coordination to ensure the success of the tournament." } },
+    { when: "2025", what: { es: "Monitor de Campamento Deportivo — Ayuntamiento de Trillo", en: "Sports Camp Monitor — Trillo Town Hall" }, body: { es: "Liderazgo y supervisión de grupos juveniles. Diseño de actividades recreativas y deportivas, fomentando el trabajo en equipo, la seguridad y la dinamización de grupos.", en: "Leadership and supervision of youth groups. Design of recreational and sports activities, encouraging teamwork, safety and group dynamics." } },
+    { when: "2024", what: { es: "Editor de Vídeo — Creador \"Yo Soy Santo\"", en: "Video Editor — Creator \"Yo Soy Santo\"" }, body: { es: "Producción y postproducción de contenido digital. Dominio de software de edición, creatividad narrativa y gestión de tiempos para cumplir con calendarios de publicación exigentes.", en: "Digital content production and postproduction. Proficiency in editing software, narrative creativity and time management to meet demanding publishing calendars." } },
+    { when: "2023", what: { es: "Socorrista — Piscina Municipal de Trillo", en: "Lifeguard — Trillo Municipal Pool" }, body: { es: "Vigilancia activa y prevención de riesgos en instalaciones acuáticas. Gran sentido de la responsabilidad, capacidad para mantener la calma en emergencias y aplicación de primeros auxilios.", en: "Active watch and risk prevention in aquatic facilities. Strong sense of responsibility, ability to stay calm in emergencies and first-aid delivery." } }
+  ],
+  skills: [
+    { k: { es: "Diseño y Edición", en: "Design & Editing" }, v: "Photoshop, Illustrator, InDesign, Premiere Pro, After Effects, DaVinci Resolve y Affinity." },
+    { k: "UI", v: "Figma, Adobe XD." },
+    { k: "3D", v: "Blender." },
+    { k: "IA", v: "Gemini, Chat GPT, Nanobana, Meshy AI y Tripo 3D." },
+    { k: "Audio", v: "Ableton Live y Rekordbox." },
+    { k: { es: "Técnicas de Producción y Artes Gráficas", en: "Graphic Production Techniques" }, v: { es: "Serigrafía, Transfer, DTF, Cortado láser, Risografía, Impresión 3D, Letterpress, Bordado industrial, Máquina de coser y remallar.", en: "Screenprint, Transfer, DTF, Laser cut, Risograph, 3D print, Letterpress, Industrial embroidery, Sewing and serging." } },
+    { k: { es: "Idiomas", en: "Languages" }, v: { es: "Nivel alto de Inglés, titulación Goethe (Alemán).", en: "High level of English, Goethe certification (German)." } },
+    { k: "Soft Skills", v: { es: "Capacidad de aprendizaje, adaptabilidad, pensamiento estratégico, comunicación y pensamiento.", en: "Learning ability, adaptability, strategic thinking, communication and thought." } }
+  ],
+  education: [
+    { when: "2023–2027", what: { es: "IED Madrid — Istituto Europeo di Design", en: "IED Madrid — Istituto Europeo di Design" }, body: { es: "Título de Grado en Enseñanzas Artísticas Superiores de Diseño. Especialidad en Diseño Gráfico.", en: "Bachelor's Degree in Higher Artistic Studies in Design. Specialty in Graphic Design." } },
+    { when: "2026", what: { es: "WorkshopWeek Design Food Experience (IED Madrid)", en: "WorkshopWeek Design Food Experience (IED Madrid)" }, body: "" }
+  ],
+  contact: {
+    phone: "+34 622 81 13 81",
+    email: "diegotraka16@gmail.com",
+    updated: { es: "Abril 2026", en: "April 2026" }
+  }
+};
+
+const I18N = {
+  es: {
+    menu_work: "Trabajos", menu_cv: "CV", menu_about: "Sobre mí", menu_contact: "Contacto",
+    home_tag_portfolio: "Portfolio · 2023 → 2027",
+    role: "Diseñador gráfico · Dirección & Producción Audiovisual",
+    subline_city: "Sevilla · Madrid · Trillo", subline_age: "20 años", subline_school: "IED Madrid",
+    intro_about_h: "Sobre mí", intro_contact_h: "Contacto", intro_facts_h: "Datos",
+    fact_based: "Base", fact_studies: "Estudios", fact_age: "Edad", fact_lang: "Idiomas", fact_updated: "Actualizado",
+    index_h: "Índice de trabajos", index_count: "Proyectos",
+    col_n: "Nº", col_title: "Título", col_kind: "Tipo", col_year: "Año", col_view: "Ver",
+    featured_kicker: "Destacado", featured_cta: "Ver proyecto completo",
+    foot_location: "Ubicación", foot_avail: "Disponibilidad", foot_avail_v: "Colaboraciones · freelance", foot_updated: "Última act.",
+    back_to_index: "Volver al índice",
+    process: "Proceso", about_project: "Sobre el proyecto", selected_photos: "Fotografía seleccionada", result: "Resultado",
+    next_project: "Siguiente proyecto", prev_project: "Anterior",
+    cv_name_sub: "Diseñador gráfico · IED Madrid",
+    cv_h_experience: "Experiencia", cv_h_skills: "Habilidades", cv_h_education: "Formación",
+    cv_h_contact: "Contacto", cv_h_profile: "Perfil",
+    cv_download: "Descargar CV (PDF)", cv_updated: "Última actualización",
+    tweak_header: "TWEAKS", tweak_mode: "Modo", tweak_light: "Light", tweak_dark: "Dark",
+    tweak_images: "Imágenes", tweak_bw: "B/N", tweak_color: "Color",
+    tweak_type: "Tipografía", tweak_font_archivo: "Archivo", tweak_font_helv: "Helvetica", tweak_font_mono: "Mono"
+  },
+  en: {
+    menu_work: "Work", menu_cv: "CV", menu_about: "About", menu_contact: "Contact",
+    home_tag_portfolio: "Portfolio · 2023 → 2027",
+    role: "Graphic designer · Direction & Audiovisual Production",
+    subline_city: "Seville · Madrid · Trillo", subline_age: "20 years", subline_school: "IED Madrid",
+    intro_about_h: "About me", intro_contact_h: "Contact", intro_facts_h: "Facts",
+    fact_based: "Based", fact_studies: "Studies", fact_age: "Age", fact_lang: "Languages", fact_updated: "Updated",
+    index_h: "Index of work", index_count: "Projects",
+    col_n: "Nº", col_title: "Title", col_kind: "Kind", col_year: "Year", col_view: "View",
+    featured_kicker: "Featured", featured_cta: "See full project",
+    foot_location: "Location", foot_avail: "Available for", foot_avail_v: "Collaborations · freelance", foot_updated: "Updated",
+    back_to_index: "Back to index",
+    process: "Process", about_project: "About the project", selected_photos: "Selected photography", result: "Result",
+    next_project: "Next project", prev_project: "Previous",
+    cv_name_sub: "Graphic designer · IED Madrid",
+    cv_h_experience: "Experience", cv_h_skills: "Skills", cv_h_education: "Education",
+    cv_h_contact: "Contact", cv_h_profile: "Profile",
+    cv_download: "Download CV (PDF)", cv_updated: "Last update",
+    tweak_header: "TWEAKS", tweak_mode: "Mode", tweak_light: "Light", tweak_dark: "Dark",
+    tweak_images: "Images", tweak_bw: "B/W", tweak_color: "Color",
+    tweak_type: "Type", tweak_font_archivo: "Archivo", tweak_font_helv: "Helvetica", tweak_font_mono: "Mono"
+  }
+};
+
+function loc(val, lang) {
+  if (val == null) return "";
+  if (typeof val === "string") return val;
+  if (typeof val === "object" && (val.es || val.en)) return val[lang] || val.es || val.en || "";
+  return String(val);
+}
+
+/* ── SHARED UI ───────────────────────────────────────────────────────── */
+const { useState, useEffect, useRef } = React;
+
+function RotatedImage({ src, alt, loading }) {
+  const wrapRef = useRef(null);
+  const fit = (e) => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const cw = wrap.clientWidth;
+    const ch = wrap.clientHeight;
+    const img = e.target;
+    // After rotate(-90deg): visual_width = css_height, visual_height = css_width
+    // Set css dimensions so rotated image fills the container exactly
+    img.style.width  = ch + 'px';
+    img.style.height = cw + 'px';
+    img.style.left   = (cw - ch) / 2 + 'px';
+    img.style.top    = (ch - cw) / 2 + 'px';
+  };
+  return (
+    <div ref={wrapRef} style={{width:"100%", height:"100%", position:"relative", overflow:"hidden"}}>
+      <img src={src} alt={alt} loading={loading}
+        style={{position:"absolute", transform:"rotate(-90deg)", transformOrigin:"center", maxWidth:"none"}}
+        onLoad={fit}
+      />
+    </div>
+  );
+}
+
+function GridLines() {
+  return (
+    <div className="gridlines" aria-hidden="true">
+      {Array.from({ length: 12 }).map((_, i) => <span key={i} />)}
+    </div>
+  );
+}
+
+function TopBar({ route, setRoute, lang, setLang, t }) {
+  return (
+    <header className="topbar">
+      <a className="brand" href="#/" onClick={(e) => { e.preventDefault(); setRoute({ name: "home" }); }}>
+        {route.name === "home" ? "PORTFOLIO" : <>DIEGO PEREZ MUÑOZ<span style={{ color: "var(--mute)", marginLeft: 10, fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.08em" }}>— PORTFOLIO</span></>}
+      </a>
+      <nav>
+        <a href="#/" className={route.name === "home" ? "active" : ""} onClick={(e) => { e.preventDefault(); setRoute({ name: "home" }); }}>{t.menu_work}</a>
+        <a href="#/cv" className={route.name === "cv" ? "active" : ""} onClick={(e) => { e.preventDefault(); setRoute({ name: "cv" }); }}>{t.menu_cv}</a>
+        <a href={`mailto:${CV_DATA.contact.email}`}>{t.menu_contact}</a>
+      </nav>
+      <div className="lang">
+        <button className={lang === "es" ? "active" : ""} onClick={() => setLang("es")}>ES</button>
+        <span>/</span>
+        <button className={lang === "en" ? "active" : ""} onClick={() => setLang("en")}>EN</button>
+      </div>
+    </header>
+  );
+}
+
+function Placeholder({ label }) {
+  return (
+    <div style={{
+      width: "100%", height: "100%",
+      background: "repeating-linear-gradient(135deg, #e8e8e8 0 8px, #d9d9d9 8px 16px)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      fontFamily: "var(--font-mono)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.06em",
+      color: "#555", padding: 16, textAlign: "center"
+    }}>
+      <span>{label}</span>
+    </div>
+  );
+}
+
+function ImageGrid({ images, lang }) {
+  const sizeCls = (im) => {
+    const base = im.size === "wide" ? "cell wide"
+      : im.size === "sq"    ? "cell sq"
+      : im.size === "third" ? "cell third"
+      : im.size === "tall"  ? "cell tall"
+      : "cell";
+    const fit = im.fit ? " fit" : "";
+    return (im.rotate ? base + " rotated" : base) + fit;
+  };
+  return (
+    <div className="img-grid">
+      {images.map((im, i) => (
+        <div key={i} className={sizeCls(im)} style={im.rotate ? {aspectRatio:"2/3"} : undefined}>
+          {im.src
+            ? (im.rotate
+                ? <RotatedImage src={im.src} alt="" loading="lazy" />
+                : <img src={im.src} alt="" loading="lazy" />)
+            : <Placeholder label={loc(im.placeholder, lang) || "IMAGEN PENDIENTE"} />
+          }
+          {im.cap && <span className="cap">{im.cap}</span>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function TweaksPanel({ tweaks, setTweaks, t }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onMsg = (e) => {
+      if (!e.data) return;
+      if (e.data.type === "__activate_edit_mode") setVisible(true);
+      if (e.data.type === "__deactivate_edit_mode") setVisible(false);
+    };
+    window.addEventListener("message", onMsg);
+    try { window.parent.postMessage({ type: "__edit_mode_available" }, "*"); } catch (e) {}
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
+
+  if (!visible) return null;
+
+  const set = (k, v) => {
+    const next = { ...tweaks, [k]: v };
+    setTweaks(next);
+    try { window.parent.postMessage({ type: "__edit_mode_set_keys", edits: { [k]: v } }, "*"); } catch (e) {}
+  };
+
+  return (
+    <aside className="tweaks">
+      <header>
+        <span>{t.tweak_header}</span>
+        <button onClick={() => setVisible(false)} aria-label="close">×</button>
+      </header>
+      <div className="row">
+        <span>{t.tweak_mode}</span>
+        <div className="group">
+          <button className={`chip ${tweaks.dark ? "" : "active"}`} onClick={() => set("dark", false)}>{t.tweak_light}</button>
+          <button className={`chip ${tweaks.dark ? "active" : ""}`} onClick={() => set("dark", true)}>{t.tweak_dark}</button>
+        </div>
+      </div>
+      <div className="row">
+        <span>{t.tweak_images}</span>
+        <div className="group">
+          <button className={`chip ${tweaks.imgColor ? "" : "active"}`} onClick={() => set("imgColor", false)}>{t.tweak_bw}</button>
+          <button className={`chip ${tweaks.imgColor ? "active" : ""}`} onClick={() => set("imgColor", true)}>{t.tweak_color}</button>
+        </div>
+      </div>
+      <div className="row">
+        <span>{t.tweak_type}</span>
+        <div className="group">
+          <button className={`chip ${tweaks.font === "archivo" ? "active" : ""}`} onClick={() => set("font", "archivo")}>{t.tweak_font_archivo}</button>
+          <button className={`chip ${tweaks.font === "helv" ? "active" : ""}`} onClick={() => set("font", "helv")}>{t.tweak_font_helv}</button>
+          <button className={`chip ${tweaks.font === "mono" ? "active" : ""}`} onClick={() => set("font", "mono")}>{t.tweak_font_mono}</button>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+/* ── HOME ────────────────────────────────────────────────────────────── */
+function Home({ lang, setRoute, t }) {
+  const featured = PROJECTS.find(p => p.featured) || PROJECTS[0];
+  return (
+    <main>
+      <section className="hero">
+        <div className="titleblock">
+          <div>
+            <div className="tag">{t.home_tag_portfolio}</div>
+            <h1 style={{ fontFamily: "'Inter', sans-serif" }}>
+              Diego Pérez Muñoz
+              <span className="role" style={{ display: "block", whiteSpace: "nowrap" }}>— {t.role}</span>
+            </h1>
+          </div>
+          <div className="subline">
+            <span style={{ color: "#999" }}>Sevilla</span>
+            <span>·</span>
+            <span>Madrid</span>
+            <span>·</span>
+            <span style={{ color: "#999" }}>Trillo</span>
+            <span>·</span>
+            <span>{t.subline_school}</span>
+          </div>
+        </div>
+      </section>
+
+      <a className="featured" href={`#/p/${featured.id}`} onClick={(e) => { e.preventDefault(); setRoute({ name: "project", id: featured.id }); }}>
+        <div className="poster">
+          <img src={featured.cover} alt={featured.title} />
+          <div className="stamp">
+            <span>{t.featured_kicker} / {featured.n}</span>
+            <span>{featured.year}</span>
+          </div>
+        </div>
+        <div className="meta">
+          <div>
+            <div className="tag">{loc(featured.kind, lang)}</div>
+            <h3>{lang === "en" ? featured.titleEn : featured.title}</h3>
+          </div>
+          <p>{loc(featured.about, lang)}</p>
+          <span className="cta">{t.featured_cta} →</span>
+        </div>
+      </a>
+
+      <section>
+        <header className="index-head">
+          <span className="mono">{t.col_n}</span>
+          <h2>{t.index_h}</h2>
+          <span className="mono">{t.col_kind}</span>
+          <span className="mono">{t.col_year}</span>
+          <span className="count mono">{PROJECTS.length} · {t.index_count}</span>
+        </header>
+        {PROJECTS.map(p => (
+          <a
+            key={p.id}
+            className="prj-row"
+            href={`#/p/${p.id}`}
+            onClick={(e) => { e.preventDefault(); setRoute({ name: "project", id: p.id }); }}
+          >
+            <span className="n">{p.n}</span>
+            <span className="t">{lang === "en" ? p.titleEn : p.title}</span>
+            <span className="k">{loc(p.kind, lang)}</span>
+            <span className="y">{p.year}</span>
+            <span className="go">{t.col_view}</span>
+          </a>
+        ))}
+      </section>
+
+      <footer className="foot foot-full">
+        <div className="foot-col">
+          <div className="section-label head">{t.intro_about_h}</div>
+          <p>{loc(CV_DATA.intro, lang)}</p>
+        </div>
+        <div className="foot-col">
+          <div className="section-label head">{t.intro_facts_h}</div>
+          <ul>
+            <li><span className="k">{t.fact_based}</span><span>{t.subline_city}</span></li>
+            <li><span className="k">{t.fact_studies}</span><span>IED Madrid · 2023–2027</span></li>
+            <li><span className="k">{t.fact_lang}</span><span>ES · EN · DE (Goethe)</span></li>
+            <li><span className="k">{t.fact_updated}</span><span>{loc(CV_DATA.contact.updated, lang)}</span></li>
+          </ul>
+        </div>
+        <div className="foot-col">
+          <div className="section-label head">{t.intro_contact_h}</div>
+          <ul>
+            <li><span className="k">Tel</span><span>{CV_DATA.contact.phone}</span></li>
+            <li><span className="k">Mail</span><a href={`mailto:${CV_DATA.contact.email}`} style={{ textDecoration: "underline" }}>{CV_DATA.contact.email}</a></li>
+            <li><span className="k">CV</span><a href="#/cv" onClick={(e) => { e.preventDefault(); setRoute({ name: "cv" }); }} style={{ textDecoration: "underline" }}>{t.menu_cv} →</a></li>
+          </ul>
+        </div>
+      </footer>
+    </main>
+  );
+}
+
+/* ── PROJECT PAGE ────────────────────────────────────────────────────── */
+function ProjectPage({ id, lang, setRoute, t }) {
+  const idx = PROJECTS.findIndex(p => p.id === id);
+  const p = PROJECTS[idx];
+  if (!p) return <main style={{ padding: 40 }}>Not found.</main>;
+  const prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length];
+  const next = PROJECTS[(idx + 1) % PROJECTS.length];
+
+  return (
+    <main>
+      <div style={{ padding: "10px 0" }}>
+        <a className="back" href="#/" onClick={(e) => { e.preventDefault(); setRoute({ name: "home" }); }}>{t.back_to_index}</a>
+      </div>
+
+      <section className="prj-header">
+        <div className="left">
+          <div className="prj-kicker">{p.n} / {loc(p.kind, lang)} · {p.year}</div>
+          <h1 className="prj-title">{lang === "en" ? p.titleEn : p.title}</h1>
+        </div>
+        <div className="right">
+          <div className="prj-meta">
+            {p.meta.map((m, i) => (
+              <React.Fragment key={i}>
+                <div className="k">{loc(m.k, lang)}</div>
+                <div className="v">{loc(m.v, lang)}</div>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {p.cover && (
+        <section className="prj-hero">
+          <div className="hero-img" style={p.coverRotate ? {aspectRatio:"2/3"} : undefined}>
+            {p.coverRotate
+              ? <RotatedImage src={p.cover} alt={p.title} />
+              : <img src={p.cover} alt={p.title} />
+            }
+          </div>
+        </section>
+      )}
+
+      <section className="prj-section prj-about-process">
+        <div className="prj-col">
+          <div className="label">{t.about_project}</div>
+          <div className="body"><p>{loc(p.about, lang)}</p></div>
+        </div>
+        <div className="prj-col">
+          <div className="label">{t.process}</div>
+          <div className="body"><p>{loc(p.process, lang)}</p></div>
+        </div>
+      </section>
+
+      {p.looks && p.looks.length > 0 && (
+        <section className="prj-section">
+          <div className="label">{lang === "es" ? "Lookbook" : "Lookbook"}</div>
+          <div className="look-grid">
+            {p.looks.map(lk => (
+              <a key={lk.id} className="look-card" href={`#/p/${p.id}/look/${lk.id}`}
+                onClick={(e) => { e.preventDefault(); setRoute({ name: "look", id: p.id, lookId: lk.id }); }}>
+                <div className="look-card-img"><img src={lk.cover} alt={loc(lk.name, lang)} style={lk.coverScale || lk.coverPos ? {transform: `scale(${lk.coverScale||1})`, objectPosition: lk.coverPos||'center'} : undefined} /></div>
+                <div className="look-card-info">
+                  <span className="mono">{loc(lk.name, lang)}</span>
+                  <span className="look-arrow">→</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="prj-section">
+        <div className="label">{p.imageLabel ? loc(p.imageLabel, lang) : t.selected_photos}</div>
+        <ImageGrid images={p.images} lang={lang} />
+      </section>
+
+      <section className="prj-section">
+        <div className="label">{t.result}</div>
+        <div className="body"><p>{loc(p.result, lang)}</p></div>
+      </section>
+
+      <section className="prj-end">
+        <a className="side" href={`#/p/${prev.id}`} onClick={(e) => { e.preventDefault(); setRoute({ name: "project", id: prev.id }); }}>
+          <span className="mono">← {t.prev_project}</span>
+          <span className="big">{lang === "en" ? prev.titleEn : prev.title}</span>
+        </a>
+        <a className="side" href={`#/p/${next.id}`} onClick={(e) => { e.preventDefault(); setRoute({ name: "project", id: next.id }); }}>
+          <span className="mono">{t.next_project} →</span>
+          <span className="big">{lang === "en" ? next.titleEn : next.title}</span>
+        </a>
+      </section>
+    </main>
+  );
+}
+
+/* ── CV PAGE ─────────────────────────────────────────────────────────── */
+function CvPage({ lang, t }) {
+  const d = CV_DATA;
+  return (
+    <main>
+      <section className="cv-headline">
+        <div style={{ padding: "0 22px 0 0" }}>
+          <div className="tag" style={{ marginBottom: 10 }}>{t.cv_updated}: {loc(d.contact.updated, lang)}</div>
+          <a className="mono" href="assets/cv.pdf" download style={{ textDecoration: "underline" }}>{t.cv_download} ↓</a>
+        </div>
+        <div className="name">
+          Diego Perez Muñoz
+          <span className="sub">{t.cv_name_sub} · {t.subline_city || "Sevilla · Madrid · Trillo"}</span>
+        </div>
+      </section>
+
+      <section className="cv">
+        <div className="left">
+          <img src="assets/retrato.jpg" alt="Retrato Diego" />
+          <div className="block skills">
+            <h3>{t.cv_h_skills}</h3>
+            {d.skills.map((s, i) => (
+              <p key={i}><b>{loc(s.k, lang)}</b> | {loc(s.v, lang)}</p>
+            ))}
+          </div>
+          <div className="block">
+            <h3>{t.cv_h_contact}</h3>
+            <p style={{ fontSize: 14, margin: "4px 0" }}>{d.contact.phone}</p>
+            <p style={{ fontSize: 14, margin: "4px 0" }}><a href={`mailto:${d.contact.email}`} style={{ textDecoration: "underline" }}>{d.contact.email}</a></p>
+          </div>
+          <div className="block">
+            <h3>{t.cv_h_education}</h3>
+            {d.education.map((e, i) => (
+              <div className="item" key={i}>
+                <div className="when">{e.when} | {loc(e.what, lang)}</div>
+                {e.body && <div className="what">{loc(e.body, lang)}</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="right">
+          <div className="block">
+            <h3>{t.cv_h_profile}</h3>
+            <p style={{ maxWidth: "58ch" }}>{loc(d.intro, lang)}</p>
+          </div>
+          <div className="block">
+            <h3>{t.cv_h_experience}</h3>
+            {d.experience.map((e, i) => (
+              <div className="item" key={i}>
+                <div className="when">{e.when} | {loc(e.what, lang)}</div>
+                <div className="what">{loc(e.body, lang)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+/* ── LOOK PAGE ──────────────────────────────────────────────────────── */
+function LookPage({ projectId, lookId, lang, setRoute, t }) {
+  const p = PROJECTS.find(pr => pr.id === projectId);
+  if (!p || !p.looks) return <main style={{ padding: 40 }}>Not found.</main>;
+  const look = p.looks.find(l => l.id === lookId);
+  if (!look) return <main style={{ padding: 40 }}>Look not found.</main>;
+
+  const prevLook = p.looks.find(l => l.id === lookId - 1);
+  const nextLook = p.looks.find(l => l.id === lookId + 1);
+
+  return (
+    <main>
+      <div style={{ padding: "10px 0" }}>
+        <a className="back" href={`#/p/${p.id}`} onClick={(e) => { e.preventDefault(); setRoute({ name: "project", id: p.id }); }}>
+          {lang === "en" ? "Back to" : "Volver a"} {lang === "en" ? p.titleEn : p.title}
+        </a>
+      </div>
+
+      <section className="prj-header">
+        <div className="left">
+          <div className="prj-kicker">{p.n} / {lang === "en" ? p.titleEn : p.title} · {p.year}</div>
+          <h1 className="prj-title">{loc(look.name, lang)}</h1>
+        </div>
+        <div className="right" style={{ display: "flex", alignItems: "center" }}>
+          <p style={{ maxWidth: "48ch", fontSize: 15 }}>{loc(look.desc, lang)}</p>
+        </div>
+      </section>
+
+      <section className="prj-section">
+        <div className="label">{lang === "es" ? "Fotografía del look" : "Look photography"}</div>
+        <ImageGrid images={look.images} lang={lang} />
+      </section>
+
+      <section className="prj-end">
+        {prevLook ? (
+          <a className="side" href={`#/p/${p.id}/look/${prevLook.id}`} onClick={(e) => { e.preventDefault(); setRoute({ name: "look", id: p.id, lookId: prevLook.id }); }}>
+            <span className="mono">← {t.prev_project}</span>
+            <span className="big">{loc(prevLook.name, lang)}</span>
+          </a>
+        ) : (
+          <a className="side" href={`#/p/${p.id}`} onClick={(e) => { e.preventDefault(); setRoute({ name: "project", id: p.id }); }}>
+            <span className="mono">← {lang === "en" ? "Back to project" : "Volver al proyecto"}</span>
+            <span className="big">{lang === "en" ? p.titleEn : p.title}</span>
+          </a>
+        )}
+        {nextLook ? (
+          <a className="side" href={`#/p/${p.id}/look/${nextLook.id}`} onClick={(e) => { e.preventDefault(); setRoute({ name: "look", id: p.id, lookId: nextLook.id }); }}>
+            <span className="mono">{t.next_project} →</span>
+            <span className="big">{loc(nextLook.name, lang)}</span>
+          </a>
+        ) : (
+          <a className="side" href={`#/p/${p.id}`} onClick={(e) => { e.preventDefault(); setRoute({ name: "project", id: p.id }); }}>
+            <span className="mono">{lang === "en" ? "Back to project" : "Volver al proyecto"} →</span>
+            <span className="big">{lang === "en" ? p.titleEn : p.title}</span>
+          </a>
+        )}
+      </section>
+    </main>
+  );
+}
+
+/* ── APP ─────────────────────────────────────────────────────────────── */
+const TWEAK_DEFAULTS = { dark: false, imgColor: false, font: "archivo" };
+
+function parseHash() {
+  const h = (location.hash || "").replace(/^#\/?/, "");
+  if (!h || h === "") return { name: "home" };
+  if (h === "cv") return { name: "cv" };
+  const lm = h.match(/^p\/(.+)\/look\/(\d+)$/);
+  if (lm) return { name: "look", id: lm[1], lookId: parseInt(lm[2]) };
+  const m = h.match(/^p\/(.+)$/);
+  if (m) return { name: "project", id: m[1] };
+  return { name: "home" };
+}
+
+function App() {
+  const [route, _setRoute] = useState(parseHash());
+  const [lang, setLang] = useState(() => {
+    const s = localStorage.getItem("portfolio.lang");
+    return s === "en" || s === "es" ? s : "es";
+  });
+  const [tweaks, setTweaks] = useState(TWEAK_DEFAULTS);
+
+  const setRoute = (r) => {
+    _setRoute(r);
+    if (r.name === "home") location.hash = "#/";
+    else if (r.name === "cv") location.hash = "#/cv";
+    else if (r.name === "project") location.hash = `#/p/${r.id}`;
+    else if (r.name === "look") location.hash = `#/p/${r.id}/look/${r.lookId}`;
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
+  useEffect(() => {
+    const onHash = () => _setRoute(parseHash());
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("portfolio.lang", lang);
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("dark", !!tweaks.dark);
+    document.body.classList.toggle("img-color", !!tweaks.imgColor);
+    const fm = {
+      archivo: { display: '"Archivo","Helvetica Neue",sans-serif', narrow: '"Archivo Narrow","Archivo",sans-serif', body: '"Archivo",sans-serif' },
+      helv:    { display: '"Helvetica Neue",Helvetica,Arial,sans-serif', narrow: '"Helvetica Neue Condensed","Helvetica Neue",sans-serif', body: '"Helvetica Neue",Helvetica,Arial,sans-serif' },
+      mono:    { display: '"JetBrains Mono",ui-monospace,monospace', narrow: '"JetBrains Mono",ui-monospace,monospace', body: '"JetBrains Mono",ui-monospace,monospace' }
+    }[tweaks.font] || {};
+    if (fm.display) {
+      root.style.setProperty("--font-display", fm.display);
+      root.style.setProperty("--font-narrow", fm.narrow);
+      root.style.setProperty("--font-body", fm.body);
+    }
+  }, [tweaks]);
+
+  const t = I18N[lang];
+
+  let view;
+  if (route.name === "home") view = <Home lang={lang} setRoute={setRoute} t={t} />;
+  else if (route.name === "cv") view = <CvPage lang={lang} t={t} />;
+  else if (route.name === "look") view = <LookPage projectId={route.id} lookId={route.lookId} lang={lang} setRoute={setRoute} t={t} />;
+  else if (route.name === "project") view = <ProjectPage id={route.id} lang={lang} setRoute={setRoute} t={t} />;
+
+  return (
+    <>
+      <GridLines />
+      <div className="page" data-screen-label={route.name === "project" ? `Project ${route.id}` : route.name}>
+        <TopBar route={route} setRoute={setRoute} lang={lang} setLang={setLang} t={t} />
+        {view}
+      </div>
+      <TweaksPanel tweaks={tweaks} setTweaks={setTweaks} t={t} />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
