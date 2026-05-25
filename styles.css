@@ -228,10 +228,10 @@ button{ font:inherit; background:none; border:0; color:inherit; cursor:pointer; 
   font-family:var(--font-narrow); font-weight:700; text-transform:uppercase; letter-spacing:0.02em; font-size:16px;
   border-top:1px solid #fff; padding-top:10px; width: max-content;
 }
-.featured:hover{ background:#fff; color:var(--ink); }
-.featured:hover .meta .tag{ color: var(--mute); }
-.featured:hover .meta p{ color: var(--ink); }
-.featured:hover .meta .cta{ border-top-color: var(--ink); }
+.featured:hover{ background:#c4007a; color:#000; }
+.featured:hover .meta .tag{ color:#2a002a; }
+.featured:hover .meta p{ color:#1a001a; }
+.featured:hover .meta .cta{ border-top-color:#000; color:#000; }
 
 /* Footer strip */
 .foot{
@@ -452,8 +452,8 @@ button{ font:inherit; background:none; border:0; color:inherit; cursor:pointer; 
 .dark{ --bg:#0a0a0a; --ink:#f4f4f4; --mute:#8a8a8a; --rule:#2a2a2a; --rule-strong:#eee; }
 .dark .featured{ background: var(--bg); color: var(--ink); border-color: var(--ink); }
 .dark .featured .meta p{ color:#aaa; }
-.dark .featured:hover{ background: var(--ink); color: var(--bg); }
-.dark .featured:hover .meta p{ color:#ddd; }
+.dark .featured:hover{ background:#c4007a; color:#000; }
+.dark .featured:hover .meta p{ color:#1a001a; }
 
 /* About + Process two-column layout */
 .prj-about-process{

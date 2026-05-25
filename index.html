@@ -27,7 +27,6 @@ const PROJECTS = [
     kind: { es: "Proyecto audiovisual", en: "Audiovisual project" },
     year: "2025",
     cover: "assets/mi-pueblo/08.jpg",
-    featured: true,
     about: {
       es: "Un retrato audiovisual de Trillo, el pueblo donde crecí. Una pieza íntima que reúne los gestos, los rostros y los ritmos de un sitio pequeño, montada a partir de material grabado en cámara y recuerdos sonoros.",
       en: "An audiovisual portrait of Trillo, the village where I grew up. An intimate piece that gathers the gestures, faces and rhythms of a small place, edited from camera footage and sonic memories."
@@ -153,6 +152,8 @@ const PROJECTS = [
     titleEn: "PUNKETA",
     kind: { es: "Proyecto editorial", en: "Editorial project" },
     year: "2024",
+    cover: "assets/punketa/featured.jpg",
+    featured: true,
     about: {
       es: "Revista encuadernada y diseñada íntegramente desde InDesign e Illustrator. El sistema tipográfico es la espina del proyecto: una rejilla densa, títulos grandes y cubiertas impresas en pliego.",
       en: "Magazine fully designed and bound in InDesign and Illustrator. The typographic system is the spine of the project: dense grid, big titles and covers printed on sheet."
@@ -219,13 +220,12 @@ const PROJECTS = [
   },
   {
     id: "spify-af",
-    coverRotate: true,
     n: "05",
     title: "SPIFY AF",
     titleEn: "SPIFY AF",
     kind: { es: "Proyecto de moda", en: "Fashion project" },
-    year: "2025",
-    cover: "assets/spify/04.png",
+    year: "2023",
+    cover: "assets/spify/04.jpg",
     about: {
       es: "Colección cápsula de camisetas serigrafiadas. El proyecto mezcla técnicas de producción gráfica (serigrafía, DTF, transfer) con una dirección de arte científica: escalas, acetatos y referencias a Chillida.",
       en: "Capsule t-shirt collection, screen printed. The project mixes graphic production techniques (screenprint, DTF, transfer) with a scientific art direction: scales, acetates and references to Chillida."
@@ -245,44 +245,16 @@ const PROJECTS = [
       en: "Screen-printed t-shirts and product photography to close the piece. These photos are an edited selection of the shoot."
     },
     images: [
-      { src: "assets/spify/04.png", size: "tall", rotate: true, cap: "LOOK · 04" },
-      { src: "assets/spify/01.png", size: "tall", rotate: true },
-      { src: "assets/spify/02.png", size: "tall", rotate: true },
-      { src: "assets/spify/03.png", size: "tall", rotate: true },
-      { src: "assets/spify/05.png", size: "third", rotate: true }, { src: "assets/spify/06.png", size: "third", rotate: true }, { src: "assets/spify/07.png", size: "third", rotate: true },
-      { src: "assets/spify/08.png", size: "tall", rotate: true },
-      { src: "assets/spify/09.png", size: "tall", rotate: true }
-    ]
-  },
-  {
-    id: "latam-creative-talents",
-    n: "06",
-    title: "LATAM CREATIVE TALENTS",
-    titleEn: "LATAM CREATIVE TALENTS",
-    kind: { es: "Proyecto expositivo", en: "Exhibition project" },
-    year: "2025",
-    cover: "",
-    about: {
-      es: "Proyecto expositivo para visibilizar talento creativo latinoamericano. Pieza colaborativa, pendiente de montaje y documentación fotográfica.",
-      en: "Exhibition project to showcase Latin American creative talent. Collaborative piece, pending setup and photographic documentation."
-    },
-    meta: [
-      { k: { es: "Rol", en: "Role" }, v: { es: "Diseño · Curaduría", en: "Design · Curation" } },
-      { k: { es: "Formato", en: "Format" }, v: { es: "Instalación / expositivo", en: "Installation / exhibition" } },
-      { k: { es: "Estado", en: "Status" }, v: { es: "En producción", en: "In production" } }
-    ],
-    process: {
-      es: "En producción. Esta ficha queda reservada hasta contar con documentación fotográfica del montaje.",
-      en: "In production. This card is held until we have photographic documentation of the setup."
-    },
-    result: { es: "Pendiente.", en: "Pending." },
-    images: [
-      { src: "", size: "wide",   placeholder: { es: "Render/maqueta del expositor — foto pendiente", en: "Render/mockup of display — photo pending" }, cap: "EXPOSITOR" },
-      { src: "", size: "span-6", placeholder: { es: "Montaje · vista general", en: "Setup · overall view" } },
-      { src: "", size: "span-6", placeholder: { es: "Detalle de gráfica", en: "Graphic detail" } },
-      { src: "", size: "third",  placeholder: { es: "Pieza gráfica 01", en: "Graphic piece 01" } },
-      { src: "", size: "third",  placeholder: { es: "Pieza gráfica 02", en: "Graphic piece 02" } },
-      { src: "", size: "third",  placeholder: { es: "Pieza gráfica 03", en: "Graphic piece 03" } }
+      { src: "assets/spify/14.jpg", size: "wide" },
+      { src: "assets/spify/12.jpg", size: "span-6" }, { src: "assets/spify/11.jpg", size: "span-6" },
+      { src: "assets/spify/10.jpg", size: "span-6" }, { src: "assets/spify/13.jpg", size: "span-6" },
+      { src: "assets/spify/04.jpg", size: "span-6", fit: true, cap: "LOOK · 04" },
+      { src: "assets/spify/01.jpg", size: "span-6", fit: true },
+      { src: "assets/spify/02.jpg", size: "span-6", fit: true },
+      { src: "assets/spify/03.jpg", size: "span-6", fit: true },
+      { src: "assets/spify/05.jpg", size: "third", fit: true }, { src: "assets/spify/06.jpg", size: "third", fit: true }, { src: "assets/spify/07.jpg", size: "third", fit: true },
+      { src: "assets/spify/08.jpg", size: "span-6", fit: true },
+      { src: "assets/spify/09.jpg", size: "span-6", fit: true }
     ]
   }
 ];
@@ -445,6 +417,121 @@ function Placeholder({ label }) {
   );
 }
 
+const REPEL_SOUNDS = [
+  "assets/sounds/cartoon-mix.mp3",
+  "assets/sounds/goofy-ahh-fart.mp3",
+  "assets/sounds/goofy-ahh-song.mp3",
+  "assets/sounds/goofy-ahh-samsung.mp3",
+  "assets/sounds/goofy-ahh-laugh-meme.mp3",
+  "assets/sounds/what-the-hell-goofy-ahh-slv-sounds.mp3",
+  "assets/sounds/scooby-doo-laugh-sped-up.mp3",
+  "assets/sounds/goofy-ahh-spongebob-sound.mp3",
+  "assets/sounds/raaaah.mp3",
+  "assets/sounds/goofy-ahh-runnin.mp3"
+];
+
+/* Unlock Web Audio on first user gesture anywhere on page */
+const _audioUnlock = (() => {
+  let unlocked = false;
+  const unlock = () => {
+    if (unlocked) return;
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const buf = ctx.createBuffer(1, 1, 22050);
+    const src = ctx.createBufferSource();
+    src.buffer = buf; src.connect(ctx.destination); src.start(0);
+    unlocked = true;
+    document.removeEventListener("mousemove", unlock, true);
+    document.removeEventListener("click", unlock, true);
+  };
+  document.addEventListener("mousemove", unlock, true);
+  document.addEventListener("click", unlock, true);
+})();
+
+function RepelText({ text, className, style }) {
+  const containerRef = React.useRef(null);
+  const lettersRef = React.useRef([]);
+  const mousePos = React.useRef({ x: -9999, y: -9999 });
+  const animFrame = React.useRef(null);
+  const hasPlayed = React.useRef(false);
+  const RADIUS = 120;
+  const STRENGTH = 45;
+
+  /* Pick ONE random sound for this page load */
+  const chosenSound = React.useMemo(() => {
+    const src = REPEL_SOUNDS[Math.floor(Math.random() * REPEL_SOUNDS.length)];
+    const audio = new Audio(src);
+    audio.volume = 0.55;
+    audio.preload = "auto";
+    return audio;
+  }, []);
+
+  React.useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const animate = () => {
+      const letters = lettersRef.current;
+      let activeCount = 0;
+      letters.forEach((el, i) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = cx - mousePos.current.x;
+        const dy = cy - mousePos.current.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < RADIUS) {
+          activeCount++;
+          const force = (1 - dist / RADIUS) * STRENGTH;
+          const angle = Math.atan2(dy, dx);
+          const tx = Math.cos(angle) * force;
+          const ty = Math.sin(angle) * force;
+          const rot = (Math.random() - 0.5) * force * 0.6;
+          el.style.transform = `translate(${tx}px, ${ty}px) rotate(${rot}deg)`;
+          el.style.transition = "transform 0.08s ease-out";
+        } else {
+          el.style.transform = "translate(0, 0) rotate(0deg)";
+          el.style.transition = "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)";
+        }
+      });
+      /* Play sound once on first hover that touches letters */
+      if (activeCount > 0 && !hasPlayed.current) {
+        hasPlayed.current = true;
+        chosenSound.play().catch(() => {});
+      }
+      animFrame.current = requestAnimationFrame(animate);
+    };
+
+    const onMove = (e) => { mousePos.current = { x: e.clientX, y: e.clientY }; };
+    const onLeave = () => { mousePos.current = { x: -9999, y: -9999 }; };
+
+    container.addEventListener("mousemove", onMove);
+    container.addEventListener("mouseleave", onLeave);
+    animFrame.current = requestAnimationFrame(animate);
+
+    return () => {
+      container.removeEventListener("mousemove", onMove);
+      container.removeEventListener("mouseleave", onLeave);
+      cancelAnimationFrame(animFrame.current);
+    };
+  }, []);
+
+  const chars = text.split("");
+  return (
+    <span ref={containerRef} className={className} style={{ ...style, display: "inline-block", cursor: "default" }}>
+      {chars.map((ch, i) => (
+        <span
+          key={i}
+          ref={(el) => (lettersRef.current[i] = el)}
+          style={{ display: "inline-block", willChange: "transform" }}
+        >
+          {ch === " " ? " " : ch}
+        </span>
+      ))}
+    </span>
+  );
+}
+
 function ImageGrid({ images, lang }) {
   const sizeCls = (im) => {
     const base = im.size === "wide" ? "cell wide"
@@ -536,7 +623,7 @@ function Home({ lang, setRoute, t }) {
           <div>
             <div className="tag">{t.home_tag_portfolio}</div>
             <h1 style={{ fontFamily: "'Inter', sans-serif" }}>
-              Diego Pérez Muñoz
+              <RepelText text="Diego Pérez Muñoz" />
               <span className="role" style={{ display: "block", whiteSpace: "nowrap" }}>— {t.role}</span>
             </h1>
           </div>
