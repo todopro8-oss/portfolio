@@ -5,8 +5,12 @@ Decisiones que la spec (`PROMPT_BAR.md`) no cubre, la interpretan o chocan con l
 
 ## H0
 
-**D1. Etiqueta y rama.** `v1-portfolio-clasico` marca `69cadc8` (el `main` actual, que sigue publicado) y
-la rama `bar` sale de ahí. En `bar` solo se han añadido documentos; no se ha borrado ni movido nada.
+**D1. Etiqueta y rama.** La rama `bar` sale de `69cadc8` (el `main` actual, que sigue publicado). En
+`bar` solo se han añadido documentos; no se ha borrado ni movido nada. La etiqueta `v1-portfolio-clasico`
+sobre `69cadc8` no se pudo subir desde el entorno de Claude (su proxy de git solo admite ramas). Mientras
+no exista, `69cadc8` es la referencia del portfolio clásico. Para crearla en GitHub: *Releases → Draft a
+new release → Choose a tag*, escribir `v1-portfolio-clasico`, destino `main` (mientras `main` siga en
+`69cadc8`) y publicar.
 
 **D2. Correcciones a la sección 1 de la spec.**
 
