@@ -4,6 +4,20 @@ Remake-homenaje jugable de los simuladores de mus de bar de mediados de los 90 (
 Círculo A.S.M., 1995-96). La especificación completa está en `PROMPT.md`; este archivo es el resumen
 operativo. Las decisiones que no están en la spec, o que la interpretan, van en `DECISIONES.md`.
 
+## Cambio de rumbo (septiembre de 2026)
+
+El juego pasa a vivir dentro del nuevo portfolio de Diego Pérez Muñoz, **«Diego Pérez Bar»** (repo
+`todopro8-oss/portfolio`, rama `bar`; spec en `PROMPT_BAR.md` de ese repo). Allí, la mesa de mus de una
+esquina del bar abre el juego en `/mus/`, directamente en la selección de compañero.
+
+- En el H6 del portfolio, este código se mueve a `src/game/` con sus tests, y lo reutilizable (bucle,
+  pantalla, entrada, fuente, paleta, Pixeles, hojas Aseprite, audio) a `src/engine/`.
+- El camarero del juego pasa a ser Diego (Nicanor se retira) y el bar, «Diego Pérez Bar». Diego es la
+  única excepción a «nada de personas reales» (ver `DECISIONES.md` del portfolio, D4).
+- Copia de seguridad de este estado: commit `a7aba50` de la rama `claude/new-session-eqp2k1`.
+- Hasta la mudanza, este proyecto sigue aquí y **no se borra nada**. Lo demás de `PROMPT.md` (reglas, IA,
+  señas, originalidad) sigue vigente.
+
 ## Qué es
 
 - Mus por parejas, 1 humano (asiento 0, sur) + 3 IA: compañero en el norte (2), rivales en el este (1)
