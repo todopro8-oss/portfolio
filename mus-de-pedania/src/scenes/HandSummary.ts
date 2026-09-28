@@ -1,8 +1,8 @@
 // Recuento de la mano (sección 9, punto 9): pizarrita central que lista lance a lance
 // lo que cobra cada pareja. La mesa la muestra encima mientras las piedras vuelan.
 
-import { texto } from '../core/bitmapFont';
-import { NOMBRE_EQUIPO, NOMBRE_LANCE, describirParte } from '../data/narrador.es';
+import { AVANCE, texto } from '../core/bitmapFont';
+import { NOMBRE_LANCE, resumirPartes } from '../data/narrador.es';
 import { UI } from '../data/ui.es';
 import { DERIVADOS as D, PALETA as P } from '../data/palette';
 import type { LineaRecuento } from '../mus/types';
@@ -46,42 +46,12 @@ export class HandSummary {
       }
       const eq = l.equipo === 0 ? 'Nos.' : 'Ellos';
       texto(ctx, eq, x + 45, ly, l.equipo === 0 ? D.bastos_brillo : D.copas_brillo, { variante: 'tiza' });
-      // Partes: «+2 (querido)» abreviadas para que quepan.
-      const partes = l.partes.map((p) => describirParte(p));
-      const resumen = compactar(partes);
-      texto(ctx, resumen, x + w - 3, ly, P.tiza, { alinear: 'derecha', variante: 'tiza' });
+      // Partes: «+2 (querido)», abreviadas si no caben tras el nombre de la pareja.
+      const max = Math.floor((w - 3 - (45 + 5 * AVANCE + 2)) / AVANCE);
+      texto(ctx, resumirPartes(l.partes, max), x + w - 3, ly, P.tiza, { alinear: 'derecha', variante: 'tiza' });
     });
     if (this.mensajeFinal && Math.floor(this.t / 500) % 2 === 0) {
       texto(ctx, this.mensajeFinal, x + w / 2, y + h - 10, P.tiza_sombra, { alinear: 'centro' });
     }
   }
-}
-
-/** «+1 (deje) +3 (duples)» → «+1dj +3dp» si no cabe. */
-function compactar(partes: string[]): string {
-  const largo = partes.join(' ');
-  if ([...largo].length <= 13) return largo;
-  const abrev: Record<string, string> = {
-    '(deje)': 'dj',
-    '(pareja)': 'pr',
-    '(medias)': 'md',
-    '(duples)': 'dp',
-    '(punto)': 'pt',
-  };
-  const corto = partes
-    .map((p) => {
-      const m = p.match(/^\+(\d+)\s*(.*)$/);
-      if (!m) return p;
-      const suf = abrev[m[2]] ?? m[2].replace(/[()]/g, '');
-      return `+${m[1]}${suf}`;
-    })
-    .join(' ');
-  if ([...corto].length <= 13) return corto;
-  const total = partes.reduce((a, p) => a + Number(p.match(/^\+(\d+)/)?.[1] ?? 0), 0);
-  return `+${total}`;
-}
-
-export function resumenTexto(l: LineaRecuento): string {
-  if (l.equipo === null) return `${NOMBRE_LANCE[l.lance]}: nadie`;
-  return `${NOMBRE_LANCE[l.lance]}: ${NOMBRE_EQUIPO[l.equipo]} ${l.partes.map(describirParte).join(' ')}`;
 }

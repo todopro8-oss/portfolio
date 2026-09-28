@@ -88,6 +88,33 @@ export function describirParte(p: ParteRecuento): string {
   }
 }
 
+const MOTIVO_CORTO: Record<ParteRecuento['motivo'], string> = {
+  querido: 'q',
+  paso: 'p',
+  deje: 'dj',
+  pareja: 'pr',
+  medias: 'md',
+  duples: 'dp',
+  juego31: 'j',
+  juego: 'j',
+  punto: 'pt',
+};
+
+/**
+ * Partes del recuento en `max` caracteres como mucho. Se prueba de más a menos detalle:
+ * «+2 (querido) +3 (31)» → «+2q +3j» → «+2 +3» → «+5». Las piedras nunca se pegan a otra
+ * cifra (antes «+2 (33)» acababa en «+233»).
+ */
+export function resumirPartes(partes: readonly ParteRecuento[], max: number): string {
+  const cabe = (s: string) => [...s].length <= max;
+  const opciones = [
+    partes.map(describirParte).join(' '),
+    partes.map((p) => `+${p.piedras}${MOTIVO_CORTO[p.motivo]}`).join(' '),
+    partes.map((p) => `+${p.piedras}`).join(' '),
+  ];
+  return opciones.find(cabe) ?? `+${partes.reduce((a, p) => a + p.piedras, 0)}`;
+}
+
 /** «Grande: Ellos +2 (querido)», «Pares: Nosotros +1 (deje) +3 (duples)». */
 export function describirLineaRecuento(l: LineaRecuento): string {
   if (l.equipo === null || l.partes.length === 0) return `${NOMBRE_LANCE[l.lance]}: nadie`;

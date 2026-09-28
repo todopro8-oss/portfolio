@@ -1,6 +1,7 @@
 // Capturas automáticas con Playwright (sección 16: revisar la mesa a 1x y 3x).
 //   npx tsx scripts/captura.ts --url "?galeria=cartas" --escala 3 --salida screenshots/cartas.png [--esperar 800]
-// Con --pasos "clic:120,150;espera:500;tecla:m" se pueden encadenar acciones antes de la captura.
+// Con --pasos "clic:120,150;espera:500;tecla:m" se pueden encadenar acciones antes de la captura;
+// «hasta:<expresión JS>» espera a que la expresión sea cierta y «foto:nombre» guarda una intermedia.
 
 import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
@@ -52,6 +53,8 @@ try {
       await pagina.waitForTimeout(Number(valor));
     } else if (tipo === 'eval') {
       await pagina.evaluate(valor);
+    } else if (tipo === 'hasta') {
+      await pagina.waitForFunction(valor, undefined, { timeout: 600_000, polling: 30 });
     } else if (tipo === 'foto') {
       const ruta = salida.replace(/\.png$/, `-${valor || ++n}.png`);
       mkdirSync(dirname(ruta), { recursive: true });
