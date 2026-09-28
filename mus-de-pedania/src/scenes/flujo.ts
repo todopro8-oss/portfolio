@@ -113,7 +113,11 @@ export class Flujo {
     this.juego.escenas.cambiar(new Intro(this.juego, () => this.menu()));
   }
 
+  /** Si el juego se abrió desde el bar, «menú» vuelve al bar en lugar del menú del juego. */
+  alMenu: (() => void) | null = null;
+
   menu(): void {
+    if (this.alMenu) return this.alMenu();
     this.juego.escenas.cambiar(new MainMenu(this.juego, this));
   }
 

@@ -27,7 +27,9 @@ const navegador = await chromium.launch({
   executablePath: process.env.CHROMIUM_PATH ?? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
 });
 try {
-  const pagina = await navegador.newPage({ viewport: { width: 320 * escala, height: 200 * escala } });
+  const ancho = Number(args.ancho ?? 320);
+  const alto = Number(args.alto ?? 200);
+  const pagina = await navegador.newPage({ viewport: { width: ancho * escala, height: alto * escala } });
   const errores: string[] = [];
   pagina.on('pageerror', (e) => errores.push(String(e)));
   pagina.on('console', (m) => {
@@ -36,17 +38,24 @@ try {
   await pagina.goto(`http://localhost:${puerto}/${url}`);
   await pagina.waitForTimeout(esperar);
   const canvas = pagina.locator('#pantalla');
-  const caja = await canvas.boundingBox();
+  /** Punto lógico → píxel de la ventana (la resolución lógica cambia entre el bar y el juego). */
+  const aVentana = async (x: number, y: number) => {
+    const caja = (await canvas.boundingBox())!;
+    const [w, h] = (await pagina.evaluate(
+      "[document.getElementById('pantalla').width, document.getElementById('pantalla').height]",
+    )) as [number, number];
+    return [caja.x + (x + 0.5) * (caja.width / w), caja.y + (y + 0.5) * (caja.height / h)] as const;
+  };
   let n = 0;
   for (const paso of pasos) {
     const [tipo, ...resto] = paso.split(':');
     const valor = resto.join(':');
     if (tipo === 'clic') {
       const [x, y] = valor.split(',').map(Number);
-      await pagina.mouse.click(caja!.x + (x + 0.5) * (caja!.width / 320), caja!.y + (y + 0.5) * (caja!.height / 200));
+      await pagina.mouse.click(...(await aVentana(x, y)));
     } else if (tipo === 'mover') {
       const [x, y] = valor.split(',').map(Number);
-      await pagina.mouse.move(caja!.x + (x + 0.5) * (caja!.width / 320), caja!.y + (y + 0.5) * (caja!.height / 200));
+      await pagina.mouse.move(...(await aVentana(x, y)));
     } else if (tipo === 'tecla') {
       await pagina.keyboard.press(valor);
     } else if (tipo === 'espera') {

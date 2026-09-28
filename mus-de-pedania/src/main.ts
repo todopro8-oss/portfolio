@@ -9,6 +9,7 @@ import type { IdPersonaje } from './data/characters';
 import { Flujo } from './scenes/flujo';
 import { Galeria } from './scenes/Galeria';
 import { Mesa, type ResultadoPartida } from './scenes/Table';
+import { EscenaBar } from './bar/escena';
 
 const pantalla = new Pantalla(document.getElementById('pantalla') as HTMLCanvasElement);
 const entrada = new Entrada(pantalla);
@@ -28,7 +29,7 @@ const bucle = new Bucle({
   },
   dibujar: () => {
     pantalla.ctx.fillStyle = '#000';
-    pantalla.ctx.fillRect(0, 0, 320, 200);
+    pantalla.ctx.fillRect(0, 0, pantalla.ancho, pantalla.alto);
     escenas.dibujar(pantalla.ctx);
   },
 });
@@ -88,6 +89,23 @@ function empezarMesa(): void {
   escenas.cambiar(mesa);
 }
 
+/**
+ * «Diego Pérez Bar»: el interior del bar con los proyectos como objetos. La mesa de mus lleva al
+ * juego (selección de compañero) y el menú del juego devuelve al bar, junto a la mesa.
+ */
+function abrirBar(desdeLaMesa = false): void {
+  flujo.alMenu = () => abrirBar(true);
+  escenas.cambiar(
+    new EscenaBar(juego, {
+      desdeLaMesa,
+      alJugarMus: () => {
+        pantalla.resolucion(320, 200);
+        flujo.partida();
+      },
+    }),
+  );
+}
+
 async function arrancar(): Promise<void> {
   await cargarRecursos();
   if (params.has('galeria')) {
@@ -96,6 +114,8 @@ async function arrancar(): Promise<void> {
     escenas.cambiar(g);
   } else if (params.has('mesa') || params.has('semilla') || params.has('auto')) {
     empezarMesa();
+  } else if (params.has('bar') || import.meta.env.VITE_INICIO === 'bar') {
+    abrirBar();
   } else if (params.has('menu')) {
     flujo.menu();
   } else {

@@ -200,3 +200,28 @@ Cada entrada: qué se decidió y por qué.
   sin solaparse ni quedar bajo los montones de piedras, y baraja más detallada de estilo tradicional
   español (inspirada en la Fournier pero dibujada desde cero, sin marcas ni dibujos de ninguna baraja
   comercial, como pide `PROMPT.md`).
+
+## Diego Pérez Bar: el bar principal
+
+- **Dónde.** Diego no quiere una web de contenido ni nada del portfolio clásico: quiere el bar como juego.
+  Se deshizo la web de Astro (revert en la rama `bar` del portfolio) y el bar se construye aquí, en
+  `src/bar/`, reutilizando el motor del mus. La mudanza al repo del portfolio queda para después.
+- **Resolución por escena.** `Pantalla.resolucion()` cambia la resolución lógica: el bar va a 480×270
+  (16:9) y el juego sigue a 320×200. La corrección 4:3 solo se aplica a 320×200.
+- **Composición** (PROMPT_BAR, 7.1, ajustada al dibujarla): tele (MI PUEBLO ES) arriba a la izquierda,
+  puerta, perchero con R3UP (abrigo) y SPIFY AF (camiseta), revistero con PUNKETA de frente, cartel de
+  RASKA en el centro con el único foco, teléfono, contrabarra con neón, radio y pizarra (CV), Diego tras la
+  barra, tragaperras y la mesa de mus en primer plano, abajo a la derecha.
+- **Luz.** Penumbra cálida en todo el bar y un foco sobre el cartel, con tramado Bayer entre niveles fijos
+  (`luz.ts`): ningún degradado suave. Cada objeto se ilumina según su sitio.
+- **Interacción.** Al pasar el ratón: silueta de 1 px, el objeto sube 1 px y la línea de verbo de abajo lo
+  nombra. Lupa (H o botón) para ver todo lo que se puede tocar. Tab/Intro con teclado. En táctil, el primer
+  toque selecciona y el segundo (o «ABRIR») abre. Destellos sobre lo no visitado y ✓ de tiza en lo visto.
+- **Al pulsar un proyecto:** aplastado de 2 px y hit-stop, Diego señala, la cámara se acerca a saltos
+  enteros (×1 → ×2 → ×3) y se abre una ficha **provisional** (título, tipo, año, «Próximamente»). Qué
+  se muestra dentro de cada proyecto está por decidir con Diego.
+- **Resto:** la mesa de mus abre el juego en la selección de compañero y el menú del juego vuelve al bar;
+  la radio y el botón de altavoz silencian; la tragaperras sortea iconos de los proyectos (sin el vídeo
+  del portfolio antiguo, ver D5 del portfolio); la puerta y el teléfono responden con una frase de Diego.
+- **Diego** es un placeholder procedural hasta que lleguen sus fotos: pelo rizado oscuro, perilla,
+  camiseta oscura y delantal; limpia, seca vasos, tira cañas, saluda, señala, mira al cursor y habla.

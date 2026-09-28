@@ -17,6 +17,10 @@ esquina del bar abre el juego en `/mus/`, directamente en la selección de compa
 - Copia de seguridad de este estado: commit `a7aba50` de la rama `claude/new-session-eqp2k1`.
 - Hasta la mudanza, este proyecto sigue aquí y **no se borra nada**. Lo demás de `PROMPT.md` (reglas, IA,
   señas, originalidad) sigue vigente.
+- **El bar principal se diseña aquí primero** (`src/bar/`, 480×270, con el mismo motor): interior del bar
+  con los proyectos como objetos clicables, Diego detrás de la barra y la mesa de mus que lleva al juego.
+  Se abre con `?bar` en desarrollo; el build con `VITE_INICIO=bar` arranca directamente en el bar.
+  Página jugable: `VITE_INICIO=bar npm run build && npx tsx scripts/artifact.ts --titulo "Diego Pérez Bar"`.
 
 ## Qué es
 

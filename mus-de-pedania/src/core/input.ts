@@ -3,7 +3,7 @@
 import type { Pantalla } from './pantalla';
 
 export type EventoEntrada =
-  | { tipo: 'clic'; x: number; y: number; boton: number }
+  | { tipo: 'clic'; x: number; y: number; boton: number; tactil?: boolean }
   | { tipo: 'soltar'; x: number; y: number; boton: number }
   | { tipo: 'mover'; x: number; y: number }
   | { tipo: 'tecla'; tecla: string; codigo: string; mayus: boolean; repetida: boolean };
@@ -54,7 +54,7 @@ export class Entrada {
         const p = pantalla.aLogico(t.clientX, t.clientY);
         this.raton.x = p.x;
         this.raton.y = p.y;
-        this.cola.push({ tipo: 'clic', x: p.x, y: p.y, boton: 0 });
+        this.cola.push({ tipo: 'clic', x: p.x, y: p.y, boton: 0, tactil: true });
         this.gesto();
       },
       { passive: false },

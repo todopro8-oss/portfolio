@@ -1,5 +1,6 @@
-// Pantalla lógica de 320×200 escalada a múltiplos enteros, con bandas negras
-// y la opción «Corrección 4:3» (píxel no cuadrado, como en un monitor CRT).
+// Pantalla lógica escalada a múltiplos enteros, con bandas negras. El juego va a 320×200 (con la
+// opción «Corrección 4:3», píxel no cuadrado como en un CRT); el bar, a 480×270. Cada escena pide
+// la suya con `resolucion()`.
 
 export const ANCHO = 320;
 export const ALTO = 200;
@@ -13,6 +14,9 @@ export class Pantalla {
   correccion43 = false;
   /** Desplazamiento temporal (temblor de pantalla al cantar órdago). */
   temblor = { x: 0, y: 0 };
+  /** Resolución lógica actual. */
+  ancho = ANCHO;
+  alto = ALTO;
   private escalaActual = 1;
 
   constructor(canvas: HTMLCanvasElement) {
@@ -30,6 +34,18 @@ export class Pantalla {
 
   get escala(): number {
     return this.escalaActual;
+  }
+
+  /** Cambia la resolución lógica (al pasar del bar al juego y al revés). */
+  resolucion(ancho: number, alto: number): void {
+    if (ancho === this.ancho && alto === this.alto) return;
+    this.ancho = ancho;
+    this.alto = alto;
+    this.canvas.width = ancho;
+    this.canvas.height = alto;
+    // Cambiar el tamaño del lienzo reinicia el estado del contexto.
+    this.ctx.imageSmoothingEnabled = false;
+    this.ajustar();
   }
 
   configurar(escalado: Escalado, correccion43: boolean): void {
@@ -52,24 +68,25 @@ export class Pantalla {
   }
 
   ajustar(): void {
-    const altoLogico = this.correccion43 ? 240 : ALTO;
+    // La corrección 4:3 solo tiene sentido a 320×200.
+    const altoLogico = this.correccion43 && this.ancho === ANCHO ? (this.alto * 6) / 5 : this.alto;
     const { w, h } = this.espacio();
-    const exacta = Math.min(w / ANCHO, h / altoLogico);
+    const exacta = Math.min(w / this.ancho, h / altoLogico);
     const maxEscala = Math.max(1, Math.floor(exacta));
     let escala = this.escalado === 'auto' ? maxEscala : Math.min(this.escalado, Math.max(maxEscala, 1));
     // En pantallas pequeñas (móvil), mejor aprovechar el ancho aunque el escalado no sea entero.
     if (this.escalado === 'auto' && maxEscala < 2 && exacta > 0) escala = Math.max(0.5, exacta);
     this.escalaActual = escala;
-    this.canvas.style.width = `${ANCHO * escala}px`;
+    this.canvas.style.width = `${this.ancho * escala}px`;
     this.canvas.style.height = `${altoLogico * escala}px`;
   }
 
-  /** Convierte coordenadas de ventana a coordenadas lógicas (0..319, 0..199). */
+  /** Convierte coordenadas de ventana a coordenadas lógicas (0..ancho-1, 0..alto-1). */
   aLogico(clientX: number, clientY: number): { x: number; y: number } {
     const r = this.canvas.getBoundingClientRect();
     return {
-      x: Math.floor(((clientX - r.left) * ANCHO) / r.width),
-      y: Math.floor(((clientY - r.top) * ALTO) / r.height),
+      x: Math.floor(((clientX - r.left) * this.ancho) / r.width),
+      y: Math.floor(((clientY - r.top) * this.alto) / r.height),
     };
   }
 

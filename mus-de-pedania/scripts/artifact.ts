@@ -9,12 +9,13 @@ import { argumentos } from './args';
 const RAIZ = join(import.meta.dirname, '..');
 const args = argumentos(process.argv.slice(2));
 const salida = String(args.salida ?? join(RAIZ, 'dist', 'mus-de-pedania.html'));
+const titulo = String(args.titulo ?? 'Mus de Pedanía');
 
 const js = readdirSync(join(RAIZ, 'dist', 'assets')).find((f) => f.endsWith('.js'));
 if (!js) throw new Error('No hay build: ejecuta antes «npm run build».');
 const codigo = readFileSync(join(RAIZ, 'dist', 'assets', js), 'utf8').replaceAll('</script', '<\\/script');
 
-const pagina = `<title>Mus de Pedanía</title>
+const pagina = `<title>${titulo}</title>
 <style>
   :root {
     --fondo: #0d0a08;
@@ -52,7 +53,7 @@ const pagina = `<title>Mus de Pedanía</title>
   }
 </style>
 <div id="marco">
-  <canvas id="pantalla" tabindex="0" aria-label="Mus de Pedanía: toca o haz clic para jugar"></canvas>
+  <canvas id="pantalla" tabindex="0" aria-label="${titulo}: toca o haz clic para jugar"></canvas>
 </div>
 <script type="module">
 ${codigo}
