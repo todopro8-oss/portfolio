@@ -70,8 +70,41 @@ tarjetas de Open Graph necesitan una, se usa de forma provisional la primera fot
 `telefonoPublico` a `false` hasta que Diego responda; el email sigue visible. La edad («20 años») está
 escrita a mano y caduca: se quita hasta que Diego decida.
 
-**D14. Tipografía de las páginas de contenido.** Se propondrá una familia en el H1, servida desde el propio
-sitio (sin Google Fonts: más rápido y sin llamadas a terceros). No se mantiene Archivo/Inter por inercia.
+**D14. Tipografía de las páginas de contenido.** Propuesta del H1: **Bricolage Grotesque** (OFL), una
+sola familia variable (peso y tamaño óptico) servida desde el propio sitio: sin Google Fonts, más rápido
+y sin llamadas a terceros. Tiene carácter de rótulo de bar en los titulares y se lee bien en el texto.
+Sustituye a Archivo/Inter/JetBrains Mono. Si Diego prefiere otra, se cambia en `src/styles/global.css`.
+
+## H1
+
+**D15. Estructura del contenido.** Cada proyecto es `src/content/proyectos/<slug>.md` con sus fotos en
+`src/content/proyectos/<slug>/`. Los textos cortos (sobre, proceso, resultado, ficha) van en el
+frontmatter en ES y EN, porque el cuerpo de un `.md` solo admite un idioma; el cuerpo queda libre para
+texto largo en el futuro. Las fotos conservan su número original (`look2-03.jpg` = `oviu/look2/03.jpg`).
+
+**D16. Dos marcas de estado.** `borrador: true` → la página existe y dice «Próximamente» (RASKA);
+`oculto: true` → ni página ni entrada en la carta (LATRAKABLOCK, migrado para no perderlo).
+
+**D17. Portada mientras no hay escena.** Hasta el H2-H3, `/` muestra la carta con el `<h1>` de la spec.
+Cuando llegue el bar, esa carta queda como el contenido HTML equivalente (accesible y rastreable). `/mus/`
+es un aviso sin indexar hasta el H6.
+
+**D18. Fotos.** `npm run originales` solo reduce las que pasan de 2560 px (tres de MI PUEBLO ES: de
+24,8 MB a 1,7 MB) y quita los metadatos (fecha, cámara, GPS); las demás no se recomprimen. Astro genera
+AVIF y WebP a 640/1280/1920/2560 px, sin pasar del tamaño original, y el visor abre un WebP de hasta
+2560 px. El build tarda unos 4,5 minutos la primera vez (604 variantes); después tira de caché. El vídeo de
+MI PUEBLO ES usa como póster una foto propia, no la miniatura de YouTube (nada de terceros al cargar).
+
+**D19. Textos alternativos provisionales.** El portfolio clásico no tenía `alt`. Por ahora cada foto usa
+«<proyecto> — <pie>» o «<proyecto> — foto N de M». Cada entrada de galería admite `alt: { es, en }` para
+escribirlos uno a uno en el H8.
+
+**D20. Revisión de textos.** Corregido: «Chat GPT» → «ChatGPT», «Nanobana» → «Nano Banana», y en inglés
+las listas de habilidades que conservaban la «y» española. Sin tocar, para que decida Diego: en «Soft
+skills» se repite «pensamiento» («pensamiento estratégico, comunicación y pensamiento»).
+
+**D21. Despliegue preparado.** `.github/workflows/web.yml` pasa los tests y hace el build en cada push a
+`bar` o `main`, pero solo despliega desde `main` (D10).
 
 ## Preguntas para Diego
 

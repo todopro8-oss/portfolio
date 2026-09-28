@@ -1,0 +1,16 @@
+---
+import type { GetStaticPaths } from 'astro';
+import LookPlantilla from '../../../../../../components/LookPlantilla.astro';
+import { proyectosDelBar } from '../../../../../../lib/proyectos';
+
+export const getStaticPaths = (async () => {
+  const lista = await proyectosDelBar();
+  return lista.flatMap((proyecto) =>
+    (proyecto.data.looks ?? []).map((l) => ({ params: { slug: proyecto.data.slug, n: String(l.n) }, props: { proyecto, n: l.n } })),
+  );
+}) satisfies GetStaticPaths;
+
+const { proyecto, n } = Astro.props;
+---
+
+<LookPlantilla idioma="en" proyecto={proyecto} n={n} />

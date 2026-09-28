@@ -1,0 +1,47 @@
+---
+// Portada. Hasta que llegue la escena del bar (H2-H3) muestra la carta, que después quedará como el
+// contenido HTML equivalente, accesible para lectores y buscadores (spec, sección 3).
+// También recoge los enlaces del portfolio clásico (#/p/oviu…) y el idioma recordado.
+import { textos, type Idioma } from '../i18n';
+import { proyectosDelBar } from '../lib/proyectos';
+import Base from '../layouts/Base.astro';
+import Carta from './Carta.astro';
+import UIChrome from './UIChrome.astro';
+
+interface Props {
+  idioma: Idioma;
+}
+
+const { idioma } = Astro.props;
+const t = textos(idioma);
+const proyectos = await proyectosDelBar();
+const slugs = proyectos.map((p) => p.data.slug);
+---
+
+<Base idioma={idioma} camino="/">
+  <UIChrome idioma={idioma} camino="/" />
+  <main id="contenido" data-portada data-idioma-pagina={idioma} data-slugs={JSON.stringify(slugs)}>
+    <Carta idioma={idioma} proyectos={proyectos} h1={t.h1Portada} h1Oculto />
+  </main>
+</Base>
+
+<script>
+  import { CLAVE_IDIOMA, construirRuta, type Idioma } from '../i18n';
+  import { destinoDeHash } from '../lib/redirecciones';
+
+  const portada = document.querySelector<HTMLElement>('[data-portada]');
+  if (portada) {
+    const idiomaPagina = portada.dataset.idiomaPagina as Idioma;
+    let guardado: string | null = null;
+    try {
+      guardado = localStorage.getItem(CLAVE_IDIOMA);
+    } catch {
+      // Sin almacenamiento: se queda el idioma de la URL.
+    }
+    const idioma: Idioma = guardado === 'en' || guardado === 'es' ? guardado : idiomaPagina;
+    const slugs = new Set<string>(JSON.parse(portada.dataset.slugs ?? '[]'));
+    const destino = destinoDeHash(location.hash, slugs);
+    if (destino) location.replace(construirRuta(import.meta.env.BASE_URL, destino, idioma));
+    else if (idioma !== idiomaPagina) location.replace(construirRuta(import.meta.env.BASE_URL, '/', idioma));
+  }
+</script>

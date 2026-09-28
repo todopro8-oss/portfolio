@@ -1,0 +1,121 @@
+---
+// Barra superior de las páginas de contenido: «← Volver a la barra» · título · La carta · ES/EN.
+import { otroIdioma, ruta, textos, type Idioma } from '../i18n';
+
+interface Props {
+  idioma: Idioma;
+  camino: string;
+  /** Muestra «Volver a la barra» en lugar de la marca. */
+  volver?: boolean;
+  titulo?: string;
+}
+
+const { idioma, camino, volver = false, titulo } = Astro.props;
+const t = textos(idioma);
+const otro = otroIdioma(idioma);
+---
+
+<header class="chrome">
+  <div class="contenedor chrome__fila">
+    {
+      volver ? (
+        <a class="chrome__izq" href={ruta('/', idioma)}>
+          <span aria-hidden="true">←</span> {t.nav.volverBarra}
+        </a>
+      ) : (
+        <a class="chrome__izq chrome__marca" href={ruta('/', idioma)}>
+          Diego Pérez Bar
+        </a>
+      )
+    }
+    {
+      titulo && (
+        <span class="chrome__titulo" aria-hidden="true">
+          {titulo}
+        </span>
+      )
+    }
+    <nav class="chrome__nav" aria-label={t.nav.principal}>
+      <a href={ruta('/carta/', idioma)} aria-current={camino === '/carta/' ? 'page' : undefined}>{t.nav.carta}</a>
+      <span class="chrome__idiomas">
+        <span class="chrome__actual" aria-hidden="true">{idioma.toUpperCase()}</span>
+        <span aria-hidden="true">/</span>
+        <a href={ruta(camino, otro)} hreflang={otro} lang={otro} data-idioma={otro} aria-label={t.nav.cambiarA}>
+          {otro.toUpperCase()}
+        </a>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .chrome {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--fondo) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--linea);
+  }
+  .chrome__fila {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 3.25rem;
+  }
+  .chrome a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .chrome a:hover {
+    text-decoration: underline;
+  }
+  .chrome__marca {
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  }
+  .chrome__titulo {
+    flex: 1;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--tinta-suave);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .chrome__nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .chrome__idiomas {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+  }
+  .chrome__actual {
+    font-weight: 800;
+  }
+  .chrome__idiomas a {
+    font-weight: 500;
+    color: var(--tinta-suave);
+    min-width: 44px;
+    justify-content: center;
+  }
+  @media (max-width: 40rem) {
+    .chrome__titulo {
+      display: none;
+    }
+  }
+</style>

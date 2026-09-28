@@ -1,0 +1,87 @@
+---
+// Contacto: email (enlace + copiar) y teléfono solo si Diego lo quiere público (DECISIONES D13).
+import { textos, type Idioma } from '../i18n';
+import { cv } from '../lib/cv';
+
+interface Props {
+  idioma: Idioma;
+}
+
+const t = textos(Astro.props.idioma).contacto;
+const { email, telefono, telefonoPublico } = cv.contacto;
+---
+
+<dl class="contacto">
+  <div>
+    <dt class="rotulo">{t.email}</dt>
+    <dd>
+      <a href={`mailto:${email}`}>{email}</a>
+      <button class="contacto__copiar" type="button" data-copiar={email} data-hecho={t.copiado}>{t.copiar}</button>
+      <span class="solo-lector" aria-live="polite" data-aviso></span>
+    </dd>
+  </div>
+  {
+    telefonoPublico && (
+      <div>
+        <dt class="rotulo">{t.telefono}</dt>
+        <dd>
+          <a href={`tel:${telefono.replace(/\s+/g, '')}`}>{telefono}</a>
+        </dd>
+      </div>
+    )
+  }
+</dl>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll<HTMLButtonElement>('[data-copiar]').forEach((b) => {
+      if (b.dataset.listo) return;
+      b.dataset.listo = '1';
+      const texto = b.textContent;
+      b.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(b.dataset.copiar ?? '');
+          b.textContent = b.dataset.hecho ?? '✓';
+          const aviso = b.parentElement?.querySelector<HTMLElement>('[data-aviso]');
+          if (aviso) aviso.textContent = b.dataset.hecho ?? '';
+          setTimeout(() => (b.textContent = texto), 1800);
+        } catch {
+          // Sin permiso de portapapeles: el enlace mailto sigue ahí.
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .contacto {
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .contacto dd {
+    margin: 0.15rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .contacto a {
+    overflow-wrap: anywhere;
+  }
+  .contacto__copiar {
+    min-height: 32px;
+    min-width: 44px;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>

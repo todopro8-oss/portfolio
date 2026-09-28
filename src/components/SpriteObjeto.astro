@@ -1,0 +1,24 @@
+---
+// Sprite pixel del objeto del bar, escalado a un múltiplo entero (nítido, sin suavizado).
+import { tramosDe, type Sprite } from '../lib/sprites';
+
+interface Props {
+  objeto: Sprite;
+  escala?: number;
+  class?: string;
+}
+
+const { objeto, escala = 4, class: clase } = Astro.props;
+const { ancho, alto, tramos } = tramosDe(objeto);
+---
+
+<svg
+  class:list={['pixel', clase]}
+  width={ancho * escala}
+  height={alto * escala}
+  viewBox={`0 0 ${ancho} ${alto}`}
+  aria-hidden="true"
+  focusable="false"
+>
+  {tramos.map((t) => <rect x={t.x} y={t.y} width={t.w} height="1" fill={t.color} />)}
+</svg>

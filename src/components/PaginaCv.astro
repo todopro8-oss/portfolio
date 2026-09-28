@@ -1,0 +1,225 @@
+---
+// CV completo (spec, sección 13): cabecera con la pizarra a tiza; el cuerpo, legible y sobrio.
+import { Picture } from 'astro:assets';
+import { local, textos, type Idioma } from '../i18n';
+import { cv } from '../lib/cv';
+import retrato from '../content/cv/retrato.jpg';
+import Base from '../layouts/Base.astro';
+import ContactoCard from './ContactoCard.astro';
+import UIChrome from './UIChrome.astro';
+
+interface Props {
+  idioma: Idioma;
+}
+
+const { idioma } = Astro.props;
+const t = textos(idioma);
+const camino = '/cv/';
+const pdf = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}cv.pdf`;
+---
+
+<Base idioma={idioma} camino={camino} titulo={t.cv.titulo} descripcion={t.cv.descripcion}>
+  <UIChrome idioma={idioma} camino={camino} volver titulo={t.cv.titulo} />
+  <main id="contenido">
+    <header class="pizarra">
+      <div class="contenedor pizarra__fila">
+        <div>
+          <p class="pizarra__menu">{t.cv.menuDelDia}</p>
+          <h1 class="pizarra__nombre">{cv.nombre}</h1>
+          <p class="pizarra__rol">{local(cv.rol, idioma)}</p>
+          <p class="pizarra__lugar">{local(cv.lugar, idioma)}</p>
+          <a class="boton pizarra__pdf" href={pdf} download>{t.cv.descargar}</a>
+        </div>
+        <Picture
+          src={retrato}
+          formats={['avif', 'webp']}
+          widths={[240, 480]}
+          sizes="240px"
+          alt={t.cv.retrato}
+          class="pizarra__retrato"
+          loading="eager"
+        />
+      </div>
+    </header>
+
+    <div class="contenedor cuerpo">
+      <section class="seccion" aria-labelledby="cv-perfil">
+        <h2 class="rotulo" id="cv-perfil">{t.cv.perfil}</h2>
+        <div class="perfil" set:html={local(cv.perfil, idioma)} />
+      </section>
+
+      <section class="seccion" aria-labelledby="cv-exp">
+        <h2 class="rotulo" id="cv-exp">{t.cv.experiencia}</h2>
+        <ol class="lista">
+          {
+            cv.experiencia.map((e) => (
+              <li>
+                <p class="lista__cuando">{e.cuando}</p>
+                <div>
+                  <h3 class="lista__que">{local(e.que, idioma)}</h3>
+                  {local(e.texto, idioma) && <p>{local(e.texto, idioma)}</p>}
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="seccion" aria-labelledby="cv-hab">
+        <h2 class="rotulo" id="cv-hab">{t.cv.habilidades}</h2>
+        <dl class="habilidades">
+          {
+            cv.habilidades.map((h) => (
+              <div>
+                <dt>{local(h.k, idioma)}</dt>
+                <dd>{local(h.v, idioma)}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section class="seccion" aria-labelledby="cv-form">
+        <h2 class="rotulo" id="cv-form">{t.cv.formacion}</h2>
+        <ol class="lista">
+          {
+            cv.formacion.map((e) => (
+              <li>
+                <p class="lista__cuando">{e.cuando}</p>
+                <div>
+                  <h3 class="lista__que">{local(e.que, idioma)}</h3>
+                  {local(e.texto, idioma) && <p>{local(e.texto, idioma)}</p>}
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="seccion" aria-labelledby="cv-contacto">
+        <h2 class="rotulo" id="cv-contacto">{t.cv.contacto}</h2>
+        <ContactoCard idioma={idioma} />
+      </section>
+
+      <p class="actualizado">{t.cv.actualizado}: {local(cv.actualizado, idioma)}</p>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .pizarra {
+    background: var(--pizarra);
+    color: var(--tiza);
+    border-bottom: 10px solid var(--madera);
+    box-shadow: inset 0 0 80px rgb(0 0 0 / 0.35);
+  }
+  .pizarra__fila {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-block: clamp(2rem, 6vw, 4rem);
+  }
+  .pizarra__menu {
+    margin: 0 0 0.6rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oros);
+  }
+  .pizarra__nombre {
+    font-size: clamp(2.3rem, 7vw, 4.5rem);
+    font-weight: 750;
+    letter-spacing: -0.02em;
+  }
+  .pizarra__rol {
+    margin: 0.7rem 0 0.2rem;
+    font-size: 1.15rem;
+  }
+  .pizarra__lugar {
+    color: var(--tiza-suave);
+    margin: 0 0 1.4rem;
+  }
+  .pizarra__pdf {
+    background: var(--tiza);
+    border-color: var(--tiza);
+    box-shadow: 3px 3px 0 #0e1511;
+  }
+  .pizarra :global(.pizarra__retrato) {
+    width: 200px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border: 6px solid var(--tiza);
+    transform: rotate(2deg);
+  }
+  .cuerpo {
+    max-width: 58rem;
+    padding-block: clamp(1.5rem, 4vw, 3rem);
+  }
+  .seccion {
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--linea);
+  }
+  .seccion > .rotulo {
+    margin-bottom: 1rem;
+  }
+  .perfil {
+    font-size: 1.15rem;
+    max-width: var(--texto);
+  }
+  .lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+  .lista li {
+    display: grid;
+    gap: 0.2rem 1.5rem;
+  }
+  @media (min-width: 40rem) {
+    .lista li {
+      grid-template-columns: 7.5rem 1fr;
+    }
+  }
+  .lista__cuando {
+    margin: 0;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--tinta-suave);
+  }
+  .lista__que {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+  .lista p {
+    margin: 0;
+  }
+  .habilidades {
+    margin: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+  .habilidades div {
+    display: grid;
+    gap: 0.1rem 1.5rem;
+  }
+  @media (min-width: 40rem) {
+    .habilidades div {
+      grid-template-columns: 14rem 1fr;
+    }
+  }
+  .habilidades dt {
+    font-weight: 700;
+  }
+  .habilidades dd {
+    margin: 0;
+  }
+  .actualizado {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--tinta-suave);
+  }
+</style>

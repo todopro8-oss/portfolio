@@ -1,0 +1,198 @@
+{
+  "nombre": "Diego Pérez Muñoz",
+  "rol": {
+    "es": "Diseñador Gráfico | Dirección & Producción Audiovisual",
+    "en": "Graphic Designer | Direction & Audiovisual Production"
+  },
+  "lugar": {
+    "es": "Sevilla · Madrid · Trillo",
+    "en": "Seville · Madrid · Trillo"
+  },
+  "perfil": {
+    "es": "<p>Creativo en constante formación y apasionado por el descubrimiento de nuevas disciplinas. Mi proceso de diseño se nutre de la observación del entorno y de intereses transversales.</p><p>Mi foco actual está en la dirección y producción audiovisual: busco contar historias a través de la imagen en movimiento, combinando narrativa, estética y técnica. Aplico esta curiosidad y capacidad de aprendizaje en proyectos visuales que requieran una mirada fresca y polivalente.</p>",
+    "en": "<p>A creative in constant training, passionate about discovering new disciplines. My design process feeds on observation of the surroundings and transversal interests.</p><p>My current focus is on audiovisual direction and production: I aim to tell stories through moving image, combining narrative, aesthetics and technique. I apply this curiosity and ability to learn in visual projects that require a fresh and versatile eye.</p>"
+  },
+  "experiencia": [
+    {
+      "cuando": "2026",
+      "que": {
+        "es": "Auxiliar — Fórmula E Madrid",
+        "en": "Assistant — Formula E Madrid"
+      },
+      "texto": {
+        "es": "Gestión logística y operativa en un entorno de alta presión. Control de accesos y flujos de público, demostrando capacidad de reacción y trabajo en equipo en eventos internacionales de gran escala.",
+        "en": "Logistical and operational management in a high-pressure setting. Access control and audience flow, showing reaction capacity and teamwork in large-scale international events."
+      }
+    },
+    {
+      "cuando": "2026",
+      "que": {
+        "es": "Camarero — Punto de Or'",
+        "en": "Waiter — Punto de Or'"
+      },
+      "texto": {
+        "es": "Atención al cliente directa y gestión ágil de comandas. Desarrollo de habilidades de comunicación interpersonal, resolución de conflictos y eficiencia en picos de alta carga de trabajo.",
+        "en": "Direct customer service and quick order management. Developed interpersonal communication, conflict resolution and efficiency during peak shifts."
+      }
+    },
+    {
+      "cuando": "2025 – 2026",
+      "que": {
+        "es": "Auxiliar — Mutua Madrid Open (Adecco)",
+        "en": "Assistant — Mutua Madrid Open (Adecco)"
+      },
+      "texto": {
+        "es": "Apoyo en la organización y protocolo de un evento deportivo de élite. Enfoque en la excelencia del servicio, puntualidad y coordinación con distintos departamentos para asegurar el éxito del torneo.",
+        "en": "Support in the organization and protocol of a top-level sports event. Focus on service excellence, punctuality and cross-department coordination to ensure the success of the tournament."
+      }
+    },
+    {
+      "cuando": "2025",
+      "que": {
+        "es": "Monitor de Campamento Deportivo — Ayuntamiento de Trillo",
+        "en": "Sports Camp Monitor — Trillo Town Hall"
+      },
+      "texto": {
+        "es": "Liderazgo y supervisión de grupos juveniles. Diseño de actividades recreativas y deportivas, fomentando el trabajo en equipo, la seguridad y la dinamización de grupos.",
+        "en": "Leadership and supervision of youth groups. Design of recreational and sports activities, encouraging teamwork, safety and group dynamics."
+      }
+    },
+    {
+      "cuando": "2024",
+      "que": {
+        "es": "Editor de Vídeo — Creador \"Yo Soy Santo\"",
+        "en": "Video Editor — Creator \"Yo Soy Santo\""
+      },
+      "texto": {
+        "es": "Producción y postproducción de contenido digital. Dominio de software de edición, creatividad narrativa y gestión de tiempos para cumplir con calendarios de publicación exigentes.",
+        "en": "Digital content production and postproduction. Proficiency in editing software, narrative creativity and time management to meet demanding publishing calendars."
+      }
+    },
+    {
+      "cuando": "2023",
+      "que": {
+        "es": "Socorrista — Piscina Municipal de Trillo",
+        "en": "Lifeguard — Trillo Municipal Pool"
+      },
+      "texto": {
+        "es": "Vigilancia activa y prevención de riesgos en instalaciones acuáticas. Gran sentido de la responsabilidad, capacidad para mantener la calma en emergencias y aplicación de primeros auxilios.",
+        "en": "Active watch and risk prevention in aquatic facilities. Strong sense of responsibility, ability to stay calm in emergencies and first-aid delivery."
+      }
+    }
+  ],
+  "habilidades": [
+    {
+      "k": {
+        "es": "Diseño y Edición",
+        "en": "Design & Editing"
+      },
+      "v": {
+        "es": "Photoshop, Illustrator, InDesign, Premiere Pro, After Effects, DaVinci Resolve y Affinity.",
+        "en": "Photoshop, Illustrator, InDesign, Premiere Pro, After Effects, DaVinci Resolve and Affinity."
+      }
+    },
+    {
+      "k": {
+        "es": "UI",
+        "en": "UI"
+      },
+      "v": {
+        "es": "Figma, Adobe XD.",
+        "en": "Figma, Adobe XD."
+      }
+    },
+    {
+      "k": {
+        "es": "3D",
+        "en": "3D"
+      },
+      "v": {
+        "es": "Blender.",
+        "en": "Blender."
+      }
+    },
+    {
+      "k": {
+        "es": "IA",
+        "en": "IA"
+      },
+      "v": {
+        "es": "Gemini, ChatGPT, Nano Banana, Meshy AI y Tripo 3D.",
+        "en": "Gemini, ChatGPT, Nano Banana, Meshy AI and Tripo 3D."
+      }
+    },
+    {
+      "k": {
+        "es": "Audio",
+        "en": "Audio"
+      },
+      "v": {
+        "es": "Ableton Live y Rekordbox.",
+        "en": "Ableton Live and Rekordbox."
+      }
+    },
+    {
+      "k": {
+        "es": "Técnicas de Producción y Artes Gráficas",
+        "en": "Graphic Production Techniques"
+      },
+      "v": {
+        "es": "Serigrafía, Transfer, DTF, Cortado láser, Risografía, Impresión 3D, Letterpress, Bordado industrial, Máquina de coser y remallar.",
+        "en": "Screenprint, Transfer, DTF, Laser cut, Risograph, 3D print, Letterpress, Industrial embroidery, Sewing and serging."
+      }
+    },
+    {
+      "k": {
+        "es": "Idiomas",
+        "en": "Languages"
+      },
+      "v": {
+        "es": "Nivel alto de Inglés, titulación Goethe (Alemán).",
+        "en": "High level of English, Goethe certification (German)."
+      }
+    },
+    {
+      "k": {
+        "es": "Soft Skills",
+        "en": "Soft Skills"
+      },
+      "v": {
+        "es": "Capacidad de aprendizaje, adaptabilidad, pensamiento estratégico, comunicación y pensamiento.",
+        "en": "Learning ability, adaptability, strategic thinking, communication and thought."
+      }
+    }
+  ],
+  "formacion": [
+    {
+      "cuando": "2023–2027",
+      "que": {
+        "es": "IED Madrid — Istituto Europeo di Design",
+        "en": "IED Madrid — Istituto Europeo di Design"
+      },
+      "texto": {
+        "es": "Título de Grado en Enseñanzas Artísticas Superiores de Diseño. Especialidad en Diseño Gráfico.",
+        "en": "Bachelor's Degree in Higher Artistic Studies in Design. Specialty in Graphic Design."
+      }
+    },
+    {
+      "cuando": "2026",
+      "que": {
+        "es": "WorkshopWeek Design Food Experience (IED Madrid)",
+        "en": "WorkshopWeek Design Food Experience (IED Madrid)"
+      },
+      "texto": {
+        "es": "",
+        "en": ""
+      }
+    }
+  ],
+  "contacto": {
+    "email": "diegotraka16@gmail.com",
+    "telefono": "+34 622 81 13 81",
+    "telefonoPublico": false
+  },
+  "actualizado": {
+    "es": "Junio 2026",
+    "en": "June 2026"
+  }
+}
