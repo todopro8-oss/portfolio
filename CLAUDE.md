@@ -51,34 +51,15 @@ src/components/  Carta, ProyectoPlantilla, Galeria, Lightbox, ContactoCard, UICh
 public/sprites/  atlas PNG + JSON de Aseprite; public/audio/
 ```
 
-En la raíz siguen los archivos del portfolio clásico (`index.html`, `styles.css`, `assets/`): Astro no
-los usa y `npm run migrar` lee de ahí. No se borran (ver D3).
-
-Hechos en el H1: `src/content.config.ts` (esquema zod), `src/lib/` (proyectos, CV, redirecciones de hash,
-sprites provisionales), `src/components/` (UIChrome, Carta, ProyectoPlantilla, LookPlantilla, Galeria,
-Lightbox, VideoFachada, ContactoCard, PaginaCv, Portada, PaginaSimple, SpriteObjeto), `src/layouts/Base`.
-Cada página existe en `src/pages/` y en `src/pages/en/` como envoltorio fino de un componente.
-
-## Comandos
-
-```
-npm run dev          # servidor de desarrollo (http://localhost:4321/portfolio/)
-npm test             # Vitest: contenido, rutas, textos, redirecciones
-npm run build        # astro check + build estático en dist/ (la 1.ª vez ~4,5 min por las fotos)
-npm run preview      # sirve dist/
-npm run migrar       # vuelve a generar src/content desde el index.html clásico (--forzar para pisar)
-npm run originales   # reduce a 2560 px las fotos nuevas de src/ antes de commitear
-node scripts/capturas.mjs [--salida dir]   # capturas 1×, 2× y móvil + errores de consola y 404
-```
-
-Chromium para Playwright: `/opt/pw-browsers/chromium-1194/chrome-linux/chrome` (o `CHROMIUM_PATH`).
+Mientras no llegue el H1, en la raíz siguen los archivos del portfolio clásico (`index.html`,
+`styles.css`, `assets/`).
 
 ## Hitos
 
 | Hito | Contenido                                                                 | Estado    |
 | ---- | ------------------------------------------------------------------------- | --------- |
 | H0   | Auditoría, etiqueta y rama, este archivo, `DECISIONES.md`, `AUDITORIA.md` | Hecho     |
-| H1   | Astro + i18n + contenido migrado + carta + CV + proyectos + redirecciones | Hecho     |
+| H1   | Astro + i18n + contenido migrado + carta + CV + proyectos + redirecciones | Pendiente |
 | H2   | Motor compartido + fachada (rótulo como barra de carga, puerta, audio)    | Pendiente |
 | H3   | Interior con placeholders, hotspots DOM, hover, lupa, paneo en móvil      | Pendiente |
 | H4   | Transiciones: squash, hit-stop, zoom por pasos, iris, vuelta al objeto    | Pendiente |
