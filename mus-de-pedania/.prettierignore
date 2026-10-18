@@ -1,0 +1,6 @@
+dist
+node_modules
+assets
+PROMPT.md
+package-lock.json
+VOICES.md
