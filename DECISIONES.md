@@ -73,6 +73,14 @@ escrita a mano y caduca: se quita hasta que Diego decida.
 **D14. Tipografía de las páginas de contenido.** Se propondrá una familia en el H1, servida desde el propio
 sitio (sin Google Fonts: más rápido y sin llamadas a terceros). No se mantiene Archivo/Inter por inercia.
 
+## Unificación (octubre de 2026)
+
+**D15. Un solo repo.** La carpeta `mus-de-pedania/` de `todopro8-oss/ferias-2026` (juego de mus y escena
+del bar) se trae a este repo, en la rama `bar-unificado`, con su historial completo (fusión del commit
+`8493b20`). En este paso no se reorganizan carpetas. El `index.html` de la raíz de ferias-2026 (hoja
+«Ferias 2026 · Presupuesto de bebida») no es del portfolio y no se trae. `ferias-2026` queda intacto como
+copia de seguridad; archivarlo es decisión de Diego.
+
 ## Preguntas para Diego
 
 De la sección 19 de la spec:

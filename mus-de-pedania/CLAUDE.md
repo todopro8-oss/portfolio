@@ -7,15 +7,16 @@ operativo. Las decisiones que no están en la spec, o que la interpretan, van en
 ## Cambio de rumbo (septiembre de 2026)
 
 El juego pasa a vivir dentro del nuevo portfolio de Diego Pérez Muñoz, **«Diego Pérez Bar»** (repo
-`todopro8-oss/portfolio`, rama `bar`; spec en `PROMPT_BAR.md` de ese repo). Allí, la mesa de mus de una
+`todopro8-oss/portfolio`, rama `bar-unificado`; spec en `PROMPT_BAR.md` de la raíz del repo). Allí, la mesa de mus de una
 esquina del bar abre el juego en `/mus/`, directamente en la selección de compañero.
 
 - En el H6 del portfolio, este código se mueve a `src/game/` con sus tests, y lo reutilizable (bucle,
   pantalla, entrada, fuente, paleta, Pixeles, hojas Aseprite, audio) a `src/engine/`.
 - El camarero del juego pasa a ser Diego (Nicanor se retira) y el bar, «Diego Pérez Bar». Diego es la
   única excepción a «nada de personas reales» (ver `DECISIONES.md` del portfolio, D4).
-- Copia de seguridad de este estado: commit `a7aba50` de la rama `claude/new-session-eqp2k1`.
-- Hasta la mudanza, este proyecto sigue aquí y **no se borra nada**. Lo demás de `PROMPT.md` (reglas, IA,
+- Esta carpeta ya está en el repo del portfolio, traída con su historial desde `todopro8-oss/ferias-2026`
+  (rama `claude/new-session-eqp2k1`, commit `8493b20`), que se conserva como copia de seguridad.
+- **No se borra nada**. Lo demás de `PROMPT.md` (reglas, IA,
   señas, originalidad) sigue vigente.
 - **El bar principal se diseña aquí primero** (`src/bar/`, 480×270, con el mismo motor): interior del bar
   con los proyectos como objetos clicables, Diego detrás de la barra y la mesa de mus que lleva al juego.

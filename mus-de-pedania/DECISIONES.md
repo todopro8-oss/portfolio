@@ -191,8 +191,8 @@ Cada entrada: qué se decidió y por qué.
 
 - **El recuento abreviaba mal.** La pizarrita pegaba la suma del juego a las piedras («+2 (33)» salía
   como «+233»). Ahora se resume desde los datos: «+2 (querido) +3 (31)» → «+2q +3j» → «+2 +3» → «+5».
-- **Destino del proyecto.** Se integra en el portfolio de Diego (`todopro8-oss/portfolio`, rama `bar`,
-  spec `PROMPT_BAR.md`). Las decisiones de esa integración se anotan en el `DECISIONES.md` de ese repo;
+- **Destino del proyecto.** Se integra en el portfolio de Diego (`todopro8-oss/portfolio`, rama
+  `bar-unificado`, spec `PROMPT_BAR.md`). Las decisiones de esa integración se anotan en el `DECISIONES.md` de ese repo;
   aquí solo lo que afecta al juego.
 - **Nombre del bar del juego.** Se pidió «Casa David»; la spec nueva lo llama «Diego Pérez Bar» y manda
   esa. No se aplica «Casa David».
@@ -205,7 +205,8 @@ Cada entrada: qué se decidió y por qué.
 
 - **Dónde.** Diego no quiere una web de contenido ni nada del portfolio clásico: quiere el bar como juego.
   Se deshizo la web de Astro (revert en la rama `bar` del portfolio) y el bar se construye aquí, en
-  `src/bar/`, reutilizando el motor del mus. La mudanza al repo del portfolio queda para después.
+  `src/bar/`, reutilizando el motor del mus. La mudanza al repo del portfolio se hizo en
+  octubre de 2026, sin reorganizar carpetas (ver D15 del `DECISIONES.md` del portfolio).
 - **Resolución por escena.** `Pantalla.resolucion()` cambia la resolución lógica: el bar va a 480×270
   (16:9) y el juego sigue a 320×200. La corrección 4:3 solo se aplica a 320×200.
 - **Composición** (PROMPT_BAR, 7.1, ajustada al dibujarla): tele (MI PUEBLO ES) arriba a la izquierda,

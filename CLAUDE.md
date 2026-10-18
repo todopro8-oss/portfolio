@@ -8,11 +8,14 @@ Portfolio de Diego Pérez Muñoz convertido en un bar en pixel art. La especific
 
 - Antes: este repo era un portfolio clásico (un `index.html` con React + Babel en el navegador).
   Ese estado queda etiquetado como `v1-portfolio-clasico` y sigue publicado desde `main`.
-- Ahora: se trabaja en la rama **`bar`**. El visitante llega a la fachada de «Diego Pérez Bar», entra,
-  Diego es el camarero y los objetos del bar son los proyectos. En una esquina está la mesa de mus.
-- El juego **Mus de Pedanía** (repo `todopro8-oss/ferias-2026`, carpeta `mus-de-pedania/`, copia de
-  seguridad en el commit `a7aba50` de la rama `claude/new-session-eqp2k1`) se integrará en `/mus/` en el
-  H6. Su spec (`PROMPT.md` de ese proyecto) sigue vigente: reglas, IA, señas y originalidad.
+- Ahora: se trabaja en la rama **`bar-unificado`** (sale de `bar`). El visitante llega a la fachada de
+  «Diego Pérez Bar», entra, Diego es el camarero y los objetos del bar son los proyectos. En una esquina
+  está la mesa de mus.
+- El juego **Mus de Pedanía** y la escena del bar (`src/bar/`) están en la carpeta `mus-de-pedania/` de
+  este repo, traídos con todo su historial desde `todopro8-oss/ferias-2026` (rama
+  `claude/new-session-eqp2k1`, commit `8493b20`), que se conserva intacto como copia de seguridad (ver
+  `DECISIONES.md` D15). Su spec (`mus-de-pedania/PROMPT.md`) sigue vigente: reglas, IA, señas y
+  originalidad.
 
 ## Reglas que no se negocian
 
@@ -28,6 +31,10 @@ Portfolio de Diego Pérez Muñoz convertido en un bar en pixel art. La especific
 - Las decisiones de la sección 19 de la spec **no las toma Claude**: se pregunta y se deja placeholder.
 
 ## Stack (desde el H1)
+
+> **Pendiente de revisar.** El H1 con Astro se revirtió (`4395a9d`): Diego quiere el bar como juego, no
+> una web de contenido. Hoy el bar y el juego se construyen con Vite + TypeScript en `mus-de-pedania/`.
+> Esta sección y la estructura prevista describen el plan anterior.
 
 - Astro (salida estática) + TypeScript estricto, GitHub Pages con GitHub Actions (`withastro/action`).
 - `site: 'https://todopro8-oss.github.io'`, `base: '/portfolio'`.
