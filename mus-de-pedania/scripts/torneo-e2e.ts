@@ -13,7 +13,7 @@ const turbo = Number(args.turbo ?? 8);
 const servidor = await createServer({ server: { port: 5302 }, logLevel: 'error' });
 await servidor.listen();
 const puerto = servidor.config.server.port;
-const navegador = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
+const navegador = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH });
 const pagina = await navegador.newPage({ viewport: { width: 640, height: 400 } });
 const errores: string[] = [];
 pagina.on('pageerror', (e) => errores.push(String(e.stack ?? e)));

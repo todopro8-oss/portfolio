@@ -24,7 +24,7 @@ const servidor = await createServer({ server: { port: 5299, strictPort: false },
 await servidor.listen();
 const puerto = servidor.config.server.port ?? 5299;
 const navegador = await chromium.launch({
-  executablePath: process.env.CHROMIUM_PATH ?? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
+  executablePath: process.env.CHROMIUM_PATH,
 });
 try {
   const ancho = Number(args.ancho ?? 320);

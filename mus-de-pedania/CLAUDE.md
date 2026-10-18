@@ -94,7 +94,8 @@ npm run voices:manifest                 # regenera assets/voices/manifest.json
 Al cerrar cada hito: tests en verde, `npm run build` correcto, lint limpio, commit descriptivo.
 
 Estado: H0-H8 hechos. Pruebas en navegador con Playwright en `scripts/` (jugar-humano, torneo-e2e,
-estres, audio-check, captura). Chromium en `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`.
+estres, audio-check, captura). Usan el Chromium de Playwright (instalarlo una vez con
+`npx playwright install chromium`); para otro navegador, ruta en la variable `CHROMIUM_PATH`.
 
 ## Convenciones
 

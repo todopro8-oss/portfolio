@@ -11,7 +11,7 @@ const servidor = await createServer({ server: { port: 5303 }, logLevel: 'error' 
 await servidor.listen();
 const puerto = servidor.config.server.port;
 const navegador = await chromium.launch({
-  executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
+  executablePath: process.env.CHROMIUM_PATH,
   args: ['--autoplay-policy=no-user-gesture-required'],
 });
 const pagina = await navegador.newPage();
