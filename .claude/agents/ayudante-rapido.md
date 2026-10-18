@@ -1,6 +1,6 @@
 ---
 name: ayudante-rapido
-description: Tareas mecánicas y repetitivas del portfolio: buscar en el código, renombrar o listar archivos, optimizar fotos. Úsalo para todo lo que no requiera criterio de diseño.
+description: "Tareas mecánicas y repetitivas del portfolio: buscar en el código, renombrar o listar archivos, optimizar fotos. Úsalo para todo lo que no requiera criterio de diseño."
 tools: Read, Grep, Glob, Bash
 model: haiku
 ---
