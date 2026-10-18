@@ -30,6 +30,21 @@ Portfolio de Diego Pérez Muñoz convertido en un bar en pixel art. La especific
   nada de assets de terceros. Los sonidos meme del portfolio antiguo no se reutilizan; audio propio o CC0.
 - Las decisiones de la sección 19 de la spec **no las toma Claude**: se pregunta y se deja placeholder.
 
+## Reglas del bar
+
+- **Pixel art coherente**: una sola paleta para toda la escena (la del juego más el acento de RASKA, spec
+  sección 15) y el mismo tamaño de píxel en todos los sprites; sin suavizado (`image-rendering:
+  pixelated` y escalado solo por múltiplos enteros). El juego, a 320×200, sigue la regla de ±1 px CSS
+  respecto al bar (`DECISIONES.md` D9).
+- **La personalidad del bar manda sobre las convenciones de portfolio**, sin romper el acceso rápido al
+  trabajo (1 clic para entrar, 1 para abrir, fotos a calidad completa). Nada de estética de plantilla
+  genérica.
+- **Cada objeto clicable tiene que parecerlo** (estado al pasar el ratón y al recibir el foco) y
+  funcionar con teclado; la web tiene que funcionar en móvil.
+- Para tareas mecánicas (buscar, renombrar, listar u optimizar archivos), usa el subagente
+  `ayudante-rapido`.
+- Para añadir o cambiar un proyecto, usa la skill `ficha-proyecto`.
+
 ## Stack (desde el H1)
 
 > **Pendiente de revisar.** El H1 con Astro se revirtió (`4395a9d`): Diego quiere el bar como juego, no

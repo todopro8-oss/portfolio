@@ -81,6 +81,15 @@ del bar) se trae a este repo, en la rama `bar-unificado`, con su historial compl
 «Ferias 2026 · Presupuesto de bebida») no es del portfolio y no se trae. `ferias-2026` queda intacto como
 copia de seguridad; archivarlo es decisión de Diego.
 
+**D16. Peso de las fotos.** Sustituye a la regla de la spec (originales a 2560 px y AVIF responsive con
+`astro:assets`), que dependía de Astro. Las fotos de proyecto van en WebP o JPG optimizado, de unos 300 KB
+como máximo y 2000 px en el lado largo. Los sprites y el pixel art, siempre en PNG sin pérdida. La versión
+optimizada es un archivo nuevo: los originales no se sobrescriben (D3).
+
+**D17. Formato de los proyectos.** La fuente es el catálogo del bar, `mus-de-pedania/src/bar/objetos.ts`.
+Cuando haga falta un campo nuevo (fotos, papel, herramientas…), se toma el nombre que tiene en `PROJECTS`
+del `index.html` clásico, sin inventar otro formato.
+
 ## Preguntas para Diego
 
 De la sección 19 de la spec:
